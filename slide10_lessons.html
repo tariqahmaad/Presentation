@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lessons Learned Presentation</title>
+  <title>Development Process & Methodology Lessons</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -18,6 +18,7 @@
       align-items: center;
       justify-content: center;
       background-color: #020617;
+      font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     }
 
     .slide {
@@ -26,125 +27,49 @@
       box-sizing: border-box;
       background-color: #0f172a;
       color: #cbd5e1;
-      font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      padding: 50px 70px;
-      animation: fadeIn 1s ease-in-out;
+      padding: 35px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(253, 179, 71, 0.06) 10%, transparent 11%),
+        radial-gradient(circle, rgba(138, 43, 226, 0.08) 10%, transparent 11%);
+      background-size: 45px 45px, 65px 65px;
+      opacity: 0.3;
+      animation: moveBackground 90s linear infinite;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+      z-index: 2;
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(200px, 200px) rotate(360deg);
+      }
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .header {
-      flex-shrink: 0;
-      margin-bottom: 30px;
-    }
-
-    .header h1 {
-      font-size: 44px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0 0 10px 0;
-      padding-bottom: 10px;
-      border-bottom: 3px solid #3b82f6;
-      animation: slideInDown 0.8s forwards;
-    }
-
-    .content-wrapper {
-      flex-grow: 1;
-      display: flex;
-      gap: 50px;
-      overflow: hidden;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      min-width: 0;
-    }
-
-    .section {
-      opacity: 0;
-      animation: fadeInUp 0.7s forwards;
-    }
-
-    .section h2 {
-      font-size: 24px;
-      font-weight: 600;
-      color: #ffffff;
-      margin: 0 0 12px 0;
-    }
-
-    .section ul {
-      list-style: none;
-      padding-left: 20px;
-      margin: 0;
-    }
-
-    .section li {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 10px;
-      position: relative;
-    }
-
-    .section li::before {
-      content: '•';
-      position: absolute;
-      left: -20px;
-      top: 1px;
-      color: #3b82f6;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .section li strong {
-      font-weight: 600;
-      color: #f1f5f9;
-    }
-
-    .section li .challenge {
-      color: #f59e0b;
-    }
-
-    /* Animation Delays */
-    .section:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-
-    .section:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-
-    .section:nth-child(3) {
-      animation-delay: 0.6s;
-    }
-
-    .column:nth-child(2) .section:nth-child(1) {
-      animation-delay: 0.8s;
-    }
-
-    .column:nth-child(2) .section:nth-child(2) {
-      animation-delay: 1.0s;
-    }
-
-    .column:nth-child(2) .section:nth-child(3) {
-      animation-delay: 1.2s;
-    }
-
-    @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(20px);
@@ -156,10 +81,10 @@
       }
     }
 
-    @keyframes slideInDown {
+    @keyframes slideInUp {
       from {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(30px);
       }
 
       to {
@@ -168,645 +93,293 @@
       }
     }
 
-    .content-wrapper svg {
-      max-width: 140%;
-      max-height: 120%;
-      width: auto;
-      height: auto;
+    .slide-header {
+      text-align: center;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 6px 0;
+      padding-bottom: 6px;
+      border-bottom: 3px solid #FDB347;
+      animation: fadeIn 1s ease-out;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lessons-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      gap: 18px;
+      flex: 1;
+      z-index: 1;
+      max-height: calc(720px - 140px);
+    }
+
+    .lesson-card {
+      background: rgba(26, 15, 46, 0.4);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 8px 32px rgba(138, 43, 226, 0.15);
+      transition: all 0.3s ease;
       opacity: 0;
-      animation: fadeInUp 0.8s forwards 0.3s;
+      animation: slideInUp 0.8s ease-out forwards;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(253, 179, 71, 0.15);
+      border-color: rgba(253, 179, 71, 0.4);
+    }
+
+    .lesson-card:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .lesson-card:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .lesson-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .lesson-card:nth-child(4) {
+      animation-delay: 0.5s;
+    }
+
+
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid rgba(253, 179, 71, 0.3);
+      flex-shrink: 0;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-size: 14px;
+      color: white;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .methodology .card-icon {
+      background: linear-gradient(135deg, #007AFF, #4FC3F7);
+    }
+
+    .collaboration .card-icon {
+      background: linear-gradient(135deg, #12B76A, #4ADE80);
+    }
+
+    .ai-process .card-icon {
+      background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+    }
+
+    .qa-strategy .card-icon {
+      background: linear-gradient(135deg, #EF4444, #F87171);
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #FDB347;
+      margin: 0;
+      text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
+      line-height: 1.2;
+    }
+
+    .lesson-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .challenge {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 3px solid #EF4444;
+      padding: 8px 10px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .solution {
+      background: rgba(34, 197, 94, 0.1);
+      border-left: 3px solid #22C55E;
+      padding: 8px 10px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .learning {
+      background: rgba(253, 179, 71, 0.1);
+      border-left: 3px solid #FDB347;
+      padding: 8px 10px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .lesson-section {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .lesson-section .label {
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+      display: block;
+    }
+
+    .lesson-section .content {
+      color: #F8F9FA;
+      opacity: 0.9;
+    }
+
+    .challenge .label {
+      color: #FCA5A5;
+    }
+
+    .solution .label {
+      color: #86EFAC;
+    }
+
+    .learning .label {
+      color: #FED7AA;
     }
   </style>
 </head>
 
 <body>
   <div class="slide">
-    <div class="header">
-      <h1>Challenges, Solutions, and Learnings</h1>
-    </div>
-    <div class="content-wrapper">
+    <header class="slide-header">
+      <h1>Development Process & Methodology Lessons</h1>
+    </header>
 
-      <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-      <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-      <svg viewBox="0 0 1058 642"
-        style="fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"
-        version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <style class="text-font-style fontImports" data-font-family="Roboto">
-          @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');
-        </style>
-        <g id="items" style="isolation: isolate">
-          <g id="blend" style="mix-blend-mode: normal">
-            <g id="g-root-cp_0-0_cell-0-0_7qfkx14acs9b-fill" data-item-order="-551448" transform="translate(26, 110)">
-            </g>
-            <g id="g-root-cp_1-0_cell-1-0_1qd7hb514actmp-fill" data-item-order="-551416" transform="translate(26, 194)">
-            </g>
-            <g id="g-root-cp_2-0_cell-2-0_1hhkh2914acuff-fill" data-item-order="-551374" transform="translate(26, 290)">
-            </g>
-            <g id="g-root-cp_3-0_cell-3-0_1d2dg0x14acs1x-fill" data-item-order="-551332" transform="translate(26, 386)">
-            </g>
-            <g id="g-root-cp_4-0_cell-4-0_146qfs114acsun-fill" data-item-order="-551290" transform="translate(26, 482)">
-            </g>
-            <g id="g-root-cp_0-1_cell-0-1_vb3fj514acuf5-fill" data-item-order="-551244" transform="translate(296, 110)">
-            </g>
-            <g id="g-root-cp_1-1_cell-1-1_mg2wdd14acs23-fill" data-item-order="-551208" transform="translate(296, 194)">
-            </g>
-            <g id="g-root-cp_2-1_cell-2-1_i09e8x14acsud-fill" data-item-order="-551176" transform="translate(296, 290)">
-            </g>
-            <g id="g-root-cp_3-1_cell-3-1_94me0114actn3-fill" data-item-order="-551144" transform="translate(296, 386)">
-            </g>
-            <g id="g-root-cp_4-1_cell-4-1_4osvvl14acufd-fill" data-item-order="-551112" transform="translate(296, 482)">
-            </g>
-            <g id="g-root-cp_0-2_cell-0-2_9luu914acs1v-fill" data-item-order="-551078" transform="translate(476, 110)">
-            </g>
-            <g id="g-root-cp_1-2_cell-1-2_1qf2wkh14acsnh-fill" data-item-order="-551042"
-              transform="translate(476, 194)"></g>
-            <g id="g-root-cp_2-2_cell-2-2_1lz9eg114actfr-fill" data-item-order="-551010"
-              transform="translate(476, 290)"></g>
-            <g id="g-root-cp_3-2_cell-3-2_1hjfwbl14acu81-fill" data-item-order="-550978"
-              transform="translate(476, 386)"></g>
-            <g id="g-root-cp_4-2_cell-4-2_18efrs114ae6ff-fill" data-item-order="-550946"
-              transform="translate(476, 482)"></g>
-            <g id="g-root-cp_0-3_cell-0-3_13ym9nl14ae77p-fill" data-item-order="-550912"
-              transform="translate(644, 110)"></g>
-            <g id="g-root-cp_1-3_cell-1-3_v2z9ep14ae80f-fill" data-item-order="-550876" transform="translate(644, 194)">
-            </g>
-            <g id="g-root-cp_2-3_cell-2-3_qn5ra914ae8sp-fill" data-item-order="-550844" transform="translate(644, 290)">
-            </g>
-            <g id="g-root-cp_3-3_cell-3-3_m7yq8x14ae6f7-fill" data-item-order="-550812" transform="translate(644, 386)">
-            </g>
-            <g id="g-root-cp_4-3_cell-4-3_dcbq0114ae77x-fill" data-item-order="-550780" transform="translate(644, 482)">
-            </g>
-            <g id="g-root-cp_0-4_cell-0-4_8wi7vl14ae807-fill" data-item-order="-550746" transform="translate(824, 110)">
-            </g>
-            <g id="g-root-cp_1-4_cell-1-4_4gopr514ae8sh-fill" data-item-order="-550708" transform="translate(824, 194)">
-            </g>
-            <g id="g-root-cp_2-4_cell-2-4_1q6yqg114ae70j-fill" data-item-order="-550676"
-              transform="translate(824, 290)"></g>
-            <g id="g-root-cp_3-4_cell-3-4_1hbbq7514ae7t9-fill" data-item-order="-550644"
-              transform="translate(824, 386)"></g>
-            <g id="g-root-cp_4-4_cell-4-4_1cvi82p14ae8lj-fill" data-item-order="-550611"
-              transform="translate(824, 482)"></g>
-            <g id="g-root-tx_accuracy_hvw2n514aqtca-fill" data-item-order="0" transform="translate(308, 314)">
-              <g id="tx_accuracy_hvw2n514aqtca-fill" stroke="none" fill="#f79438">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="16.99" y="27.45" dominant-baseline="ideographic">Accuracy balanced </tspan>
-                    <tspan x="43.97" y="45.45" dominant-baseline="ideographic">with speed</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-ic_bala_qs5jz514ah24k-fill" data-item-order="0" transform="translate(38, 314)"></g>
-            <g id="g-root-tx_offlinef_1hgxzz514aqtq8-fill" data-item-order="0" transform="translate(848, 218)">
-              <g id="tx_offlinef_1hgxzz514aqtq8-fill" stroke="none" fill="#ffe711">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="13.43" y="27.45" dominant-baseline="ideographic">Offline-first design </tspan>
-                    <tspan x="30.38" y="45.45" dominant-baseline="ideographic">implemented</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_manualte_qss12914aqupv-fill" data-item-order="0" transform="translate(668, 218)">
-              <g id="tx_manualte_qss12914aqupv-fill" stroke="none" fill="#ffe711">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="20.41" y="27.45" dominant-baseline="ideographic">Manual testing </tspan>
-                    <tspan x="12.31" y="45.45" dominant-baseline="ideographic">strategy effective</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_balancin_5v0bl14ah24l-fill" data-item-order="0" transform="translate(80, 320)">
-              <g id="tx_balancin_5v0bl14ah24l-fill" stroke="none" fill="#f79438">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="12" y="34" dominant-baseline="ideographic">Balancing Act</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_gitimpro_1luw2u914aqtxj-fill" data-item-order="0" transform="translate(488, 314)">
-              <g id="tx_gitimpro_1luw2u914aqtxj-fill" stroke="none" fill="#f79438">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="13.53" y="27.45" dominant-baseline="ideographic">Git improved code </tspan>
-                    <tspan x="52.01" y="45.45" dominant-baseline="ideographic">quality</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_moduleba_dhxzs114aqt50-fill" data-item-order="0" transform="translate(662, 314)">
-              <g id="tx_moduleba_dhxzs114aqt50-fill" stroke="none" fill="#f79438">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="28.58" y="27.45" dominant-baseline="ideographic">Module-based </tspan>
-                    <tspan x="14.64" y="45.45" dominant-baseline="ideographic">testing systematic</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_optimist_18lazq914aquix-fill" data-item-order="0" transform="translate(866, 302)">
-              <g id="tx_optimist_18lazq914aquix-fill" stroke="none" fill="#f79438">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="13.27" y="30.45" dominant-baseline="ideographic">Optimistic UI </tspan>
-                    <tspan x="25.41" y="48.45" dominant-baseline="ideographic">improves </tspan>
-                    <tspan x="13.24" y="66.45" dominant-baseline="ideographic">performance</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_security_1qbyj4x14aqvbi-fill" data-item-order="0" transform="translate(656, 506)">
-              <g id="tx_security_1qbyj4x14aqvbi-fill" stroke="none" fill="#f366bb">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="20.98" y="27.45" dominant-baseline="ideographic">Security validation </tspan>
-                    <tspan x="14.59" y="45.45" dominant-baseline="ideographic">ensured compliance</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-ic_spea_1lw510h14ah0cm-fill" data-item-order="0" transform="translate(38, 410)"></g>
-            <g id="g-root-tx_latencym_v6q3xd14aqux5-fill" data-item-order="0" transform="translate(314, 218)">
-              <g id="tx_latencym_v6q3xd14aqux5-fill" stroke="none" fill="#ffe711">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="14.82" y="27.45" dominant-baseline="ideographic">Latency managed </tspan>
-                    <tspan x="22.53" y="45.45" dominant-baseline="ideographic">with UI updates</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_uxdesign_dg2kip14aqu4j-fill" data-item-order="0" transform="translate(308, 410)">
-              <g id="tx_uxdesign_dg2kip14aqu4j-fill" stroke="none" fill="#fb6762">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="13.77" y="27.45" dominant-baseline="ideographic">UX design manages </tspan>
-                    <tspan x="37.32" y="45.45" dominant-baseline="ideographic">expectations</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_challeng_143m2ch14ah0jn-fill" data-item-order="0" transform="translate(80, 224)">
-              <g id="tx_challeng_143m2ch14ah0jn-fill" stroke="none" fill="#ffe711">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="12" y="34" dominant-baseline="ideographic">Challenge/Outcome</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_reviewse_1hf2kpt14aqups-fill" data-item-order="0" transform="translate(488, 410)">
-              <g id="tx_reviewse_1hf2kpt14aqups-fill" stroke="none" fill="#fb6762">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="12.19" y="27.45" dominant-baseline="ideographic">Reviews enhanced </tspan>
-                    <tspan x="32.22" y="45.45" dominant-baseline="ideographic">coordination</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-ic_opti_m97of514ae8ln-fill" data-item-order="0" transform="translate(38, 218)"></g>
-            <g id="g-root-tx_technica_1lw510h14aqw3r-fill" data-item-order="0" transform="translate(866, 134)">
-              <g id="tx_technica_1lw510h14aqw3r-fill" stroke="none" fill="#b7b7b7">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="14.58" y="34" dominant-baseline="ideographic">Technical</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_communic_hydyzl14al6v6-fill" data-item-order="0" transform="translate(80, 416)">
-              <g id="tx_communic_hydyzl14al6v6-fill" stroke="none" fill="#fb6762">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="12" y="34" dominant-baseline="ideographic">Communication</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_performa_4mazj514aqtxp-fill" data-item-order="0" transform="translate(656, 410)">
-              <g id="tx_performa_4mazj514aqtxp-fill" stroke="none" fill="#fb6762">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="12.66" y="27.45" dominant-baseline="ideographic">Performance testing </tspan>
-                    <tspan x="24.46" y="45.45" dominant-baseline="ideographic">prevented issues</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_modulara_v9uhcx14aqw3u-fill" data-item-order="0" transform="translate(836, 398)">
-              <g id="tx_modulara_v9uhcx14aqw3u-fill" stroke="none" fill="#fb6762">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="17.6" y="30.45" dominant-baseline="ideographic">Modular architecture </tspan>
-                    <tspan x="54.66" y="48.45" dominant-baseline="ideographic">enhances </tspan>
-                    <tspan x="43.59" y="66.45" dominant-baseline="ideographic">maintenance</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_qualitya_v8lj6p14aqtxm-fill" data-item-order="0" transform="translate(674, 122)">
-              <g id="tx_qualitya_v8lj6p14aqtxm-fill" stroke="none" fill="#b7b7b7">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="32.44" y="34" dominant-baseline="ideographic">Quality </tspan>
-                    <tspan x="16.34" y="58" dominant-baseline="ideographic">Assurance</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-ic_grad_1useich14al91n-fill" data-item-order="0" transform="translate(38, 506)"></g>
-            <g id="g-root-tx_teamcoll_4m25d14aqvph-fill" data-item-order="0" transform="translate(488, 122)">
-              <g id="tx_teamcoll_4m25d14aqvph-fill" stroke="none" fill="#b7b7b7">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="50.83" y="34" dominant-baseline="ideographic">Team </tspan>
-                    <tspan x="15.76" y="58" dominant-baseline="ideographic">Collaboration</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_systemli_4kfk9t14aqux8-fill" data-item-order="0" transform="translate(314, 506)">
-              <g id="tx_systemli_4kfk9t14aqux8-fill" stroke="none" fill="#f366bb">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="12.26" y="27.45" dominant-baseline="ideographic">System limitations </tspan>
-                    <tspan x="23.69" y="45.45" dominant-baseline="ideographic">are understood</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_aiintegr_142d46914aqu4g-fill" data-item-order="0" transform="translate(314, 134)">
-              <g id="tx_aiintegr_142d46914aqu4g-fill" stroke="none" fill="#b7b7b7">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="14.71" y="34" dominant-baseline="ideographic">AI Integration</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_learning_1448jfl14aqt4x-fill" data-item-order="0" transform="translate(506, 494)">
-              <g id="tx_learning_1448jfl14aqt4x-fill" stroke="none" fill="#f366bb">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="27.19" y="30.45" dominant-baseline="ideographic">Learning </tspan>
-                    <tspan x="12.11" y="48.45" dominant-baseline="ideographic">strengthened </tspan>
-                    <tspan x="18.04" y="66.45" dominant-baseline="ideographic">capabilities</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_characte_zko6sh14ae70q-fill" data-item-order="0" transform="translate(38, 134)">
-              <g id="tx_characte_zko6sh14ae70q-fill" stroke="none" fill="#ffe711">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="12" y="34" dominant-baseline="ideographic">Characteristic</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_knowledg_18i6map14aqtc7-fill" data-item-order="0" transform="translate(80, 512)">
-              <g id="tx_knowledg_18i6map14aqtc7-fill" stroke="none" fill="#f366bb">
-                <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
-                    font-size="20px" font-family="Roboto, sans-serif">
-                    <tspan x="12" y="34" dominant-baseline="ideographic">Knowledge</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-tx_distribu_1qapkyp14aqt5a-fill" data-item-order="0" transform="translate(506, 206)">
-              <g id="tx_distribu_1qapkyp14aqt5a-fill" stroke="none" fill="#ffe711">
-                <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
-                    font-family="Roboto, sans-serif">
-                    <tspan x="19.7" y="30.45" dominant-baseline="ideographic">Distributed </tspan>
-                    <tspan x="12.96" y="48.45" dominant-baseline="ideographic">development </tspan>
-                    <tspan x="20.01" y="66.45" dominant-baseline="ideographic">successful</tspan>
-                  </text></g>
-              </g>
-            </g>
-            <g id="g-root-cp_0-0_cell-0-0_7qfkx14acs9b-stroke" data-item-order="-551448" transform="translate(26, 110)">
-              <g id="cp_0-0_cell-0-0_7qfkx14acs9b-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 268 22L 268 70M 10 70L 10 22M 22 10L 256 10M 10 70L 10 76C 10 79.3137 12.6863 82 16 82L 22 82M 268 22L 268 16C 268 12.6863 265.3137 10 262 10L 256 10M 256 82L 22 82M 268 70L 268 76C 268 79.3137 265.3137 82 262 82L 256 82">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_1-0_cell-1-0_1qd7hb514actmp-stroke" data-item-order="-551416"
-              transform="translate(26, 194)">
-              <g id="cp_1-0_cell-1-0_1qd7hb514actmp-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 268 22L 268 82M 10 82L 10 22M 22 10L 256 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 268 22L 268 16C 268 12.6863 265.3137 10 262 10L 256 10M 256 94L 22 94M 268 82L 268 88C 268 91.3137 265.3137 94 262 94L 256 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_2-0_cell-2-0_1hhkh2914acuff-stroke" data-item-order="-551374"
-              transform="translate(26, 290)">
-              <g id="cp_2-0_cell-2-0_1hhkh2914acuff-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 268 22L 268 82M 10 82L 10 22M 22 10L 256 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 268 22L 268 16C 268 12.6863 265.3137 10 262 10L 256 10M 256 94L 22 94M 268 82L 268 88C 268 91.3137 265.3137 94 262 94L 256 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_3-0_cell-3-0_1d2dg0x14acs1x-stroke" data-item-order="-551332"
-              transform="translate(26, 386)">
-              <g id="cp_3-0_cell-3-0_1d2dg0x14acs1x-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 268 22L 268 82M 10 82L 10 22M 22 10L 256 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 268 22L 268 16C 268 12.6863 265.3137 10 262 10L 256 10M 256 94L 22 94M 268 82L 268 88C 268 91.3137 265.3137 94 262 94L 256 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_4-0_cell-4-0_146qfs114acsun-stroke" data-item-order="-551290"
-              transform="translate(26, 482)">
-              <g id="cp_4-0_cell-4-0_146qfs114acsun-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 268 22L 268 82M 10 82L 10 22M 22 10L 256 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 268 22L 268 16C 268 12.6863 265.3137 10 262 10L 256 10M 256 94L 22 94M 268 82L 268 88C 268 91.3137 265.3137 94 262 94L 256 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_0-1_cell-0-1_vb3fj514acuf5-stroke" data-item-order="-551244"
-              transform="translate(296, 110)">
-              <g id="cp_0-1_cell-0-1_vb3fj514acuf5-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#d3d3d3" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 70M 10 70L 10 22M 22 10L 166 10M 10 70L 10 76C 10 79.3137 12.6863 82 16 82L 22 82M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 82L 22 82M 178 70L 178 76C 178 79.3137 175.3137 82 172 82L 166 82">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_1-1_cell-1-1_mg2wdd14acs23-stroke" data-item-order="-551208"
-              transform="translate(296, 194)">
-              <g id="cp_1-1_cell-1-1_mg2wdd14acs23-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_2-1_cell-2-1_i09e8x14acsud-stroke" data-item-order="-551176"
-              transform="translate(296, 290)">
-              <g id="cp_2-1_cell-2-1_i09e8x14acsud-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_3-1_cell-3-1_94me0114actn3-stroke" data-item-order="-551144"
-              transform="translate(296, 386)">
-              <g id="cp_3-1_cell-3-1_94me0114actn3-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_4-1_cell-4-1_4osvvl14acufd-stroke" data-item-order="-551112"
-              transform="translate(296, 482)">
-              <g id="cp_4-1_cell-4-1_4osvvl14acufd-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_0-2_cell-0-2_9luu914acs1v-stroke" data-item-order="-551078"
-              transform="translate(476, 110)">
-              <g id="cp_0-2_cell-0-2_9luu914acs1v-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#d3d3d3" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 166 22L 166 70M 10 70L 10 22M 22 10L 154 10M 10 70L 10 76C 10 79.3137 12.6863 82 16 82L 22 82M 166 22L 166 16C 166 12.6863 163.3137 10 160 10L 154 10M 154 82L 22 82M 166 70L 166 76C 166 79.3137 163.3137 82 160 82L 154 82">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_1-2_cell-1-2_1qf2wkh14acsnh-stroke" data-item-order="-551042"
-              transform="translate(476, 194)">
-              <g id="cp_1-2_cell-1-2_1qf2wkh14acsnh-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 166 22L 166 82M 10 82L 10 22M 22 10L 154 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 166 22L 166 16C 166 12.6863 163.3137 10 160 10L 154 10M 154 94L 22 94M 166 82L 166 88C 166 91.3137 163.3137 94 160 94L 154 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_2-2_cell-2-2_1lz9eg114actfr-stroke" data-item-order="-551010"
-              transform="translate(476, 290)">
-              <g id="cp_2-2_cell-2-2_1lz9eg114actfr-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 166 22L 166 82M 10 82L 10 22M 22 10L 154 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 166 22L 166 16C 166 12.6863 163.3137 10 160 10L 154 10M 154 94L 22 94M 166 82L 166 88C 166 91.3137 163.3137 94 160 94L 154 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_3-2_cell-3-2_1hjfwbl14acu81-stroke" data-item-order="-550978"
-              transform="translate(476, 386)">
-              <g id="cp_3-2_cell-3-2_1hjfwbl14acu81-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 166 22L 166 82M 10 82L 10 22M 22 10L 154 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 166 22L 166 16C 166 12.6863 163.3137 10 160 10L 154 10M 154 94L 22 94M 166 82L 166 88C 166 91.3137 163.3137 94 160 94L 154 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_4-2_cell-4-2_18efrs114ae6ff-stroke" data-item-order="-550946"
-              transform="translate(476, 482)">
-              <g id="cp_4-2_cell-4-2_18efrs114ae6ff-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 166 22L 166 82M 10 82L 10 22M 22 10L 154 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 166 22L 166 16C 166 12.6863 163.3137 10 160 10L 154 10M 154 94L 22 94M 166 82L 166 88C 166 91.3137 163.3137 94 160 94L 154 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_0-3_cell-0-3_13ym9nl14ae77p-stroke" data-item-order="-550912"
-              transform="translate(644, 110)">
-              <g id="cp_0-3_cell-0-3_13ym9nl14ae77p-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#d3d3d3" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 70M 10 70L 10 22M 22 10L 166 10M 10 70L 10 76C 10 79.3137 12.6863 82 16 82L 22 82M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 82L 22 82M 178 70L 178 76C 178 79.3137 175.3137 82 172 82L 166 82">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_1-3_cell-1-3_v2z9ep14ae80f-stroke" data-item-order="-550876"
-              transform="translate(644, 194)">
-              <g id="cp_1-3_cell-1-3_v2z9ep14ae80f-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_2-3_cell-2-3_qn5ra914ae8sp-stroke" data-item-order="-550844"
-              transform="translate(644, 290)">
-              <g id="cp_2-3_cell-2-3_qn5ra914ae8sp-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_3-3_cell-3-3_m7yq8x14ae6f7-stroke" data-item-order="-550812"
-              transform="translate(644, 386)">
-              <g id="cp_3-3_cell-3-3_m7yq8x14ae6f7-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_4-3_cell-4-3_dcbq0114ae77x-stroke" data-item-order="-550780"
-              transform="translate(644, 482)">
-              <g id="cp_4-3_cell-4-3_dcbq0114ae77x-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 178 22L 178 82M 10 82L 10 22M 22 10L 166 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 178 22L 178 16C 178 12.6863 175.3137 10 172 10L 166 10M 166 94L 22 94M 178 82L 178 88C 178 91.3137 175.3137 94 172 94L 166 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_0-4_cell-0-4_8wi7vl14ae807-stroke" data-item-order="-550746"
-              transform="translate(824, 110)">
-              <g id="cp_0-4_cell-0-4_8wi7vl14ae807-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#d3d3d3" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 190 22L 190 70M 10 70L 10 22M 22 10L 178 10M 10 70L 10 76C 10 79.3137 12.6863 82 16 82L 22 82M 190 22L 190 16C 190 12.6863 187.3137 10 184 10L 178 10M 178 82L 22 82M 190 70L 190 76C 190 79.3137 187.3137 82 184 82L 178 82">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_1-4_cell-1-4_4gopr514ae8sh-stroke" data-item-order="-550708"
-              transform="translate(824, 194)">
-              <g id="cp_1-4_cell-1-4_4gopr514ae8sh-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 190 22L 190 82M 10 82L 10 22M 22 10L 178 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 190 22L 190 16C 190 12.6863 187.3137 10 184 10L 178 10M 178 94L 22 94M 190 82L 190 88C 190 91.3137 187.3137 94 184 94L 178 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_2-4_cell-2-4_1q6yqg114ae70j-stroke" data-item-order="-550676"
-              transform="translate(824, 290)">
-              <g id="cp_2-4_cell-2-4_1q6yqg114ae70j-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 190 22L 190 82M 10 82L 10 22M 22 10L 178 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 190 22L 190 16C 190 12.6863 187.3137 10 184 10L 178 10M 178 94L 22 94M 190 82L 190 88C 190 91.3137 187.3137 94 184 94L 178 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_3-4_cell-3-4_1hbbq7514ae7t9-stroke" data-item-order="-550644"
-              transform="translate(824, 386)">
-              <g id="cp_3-4_cell-3-4_1hbbq7514ae7t9-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 190 22L 190 82M 10 82L 10 22M 22 10L 178 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 190 22L 190 16C 190 12.6863 187.3137 10 184 10L 178 10M 178 94L 22 94M 190 82L 190 88C 190 91.3137 187.3137 94 184 94L 178 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-cp_4-4_cell-4-4_1cvi82p14ae8lj-stroke" data-item-order="-550611"
-              transform="translate(824, 482)">
-              <g id="cp_4-4_cell-4-4_1cvi82p14ae8lj-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
-                <g>
-                  <path
-                    d="M 10 22L 10 16C 10 12.6863 12.6863 10 16 10L 22 10M 190 22L 190 82M 10 82L 10 22M 22 10L 178 10M 10 82L 10 88C 10 91.3137 12.6863 94 16 94L 22 94M 190 22L 190 16C 190 12.6863 187.3137 10 184 10L 178 10M 178 94L 22 94M 190 82L 190 88C 190 91.3137 187.3137 94 184 94L 178 94">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-tx_accuracy_hvw2n514aqtca-stroke" data-item-order="0" transform="translate(308, 314)"></g>
-            <g id="g-root-ic_bala_qs5jz514ah24k-stroke" data-item-order="0" transform="translate(38, 314)">
-              <g id="ic_bala_qs5jz514ah24k-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
-                <g>
-                  <path
-                    d="M 21.625 31.825001C 21.625 32.724998 21.025 33.325001 20.125 33.325001L 12.625 33.325001C 11.725 33.325001 11.125 32.724998 11.125 31.825001L 11.125 24.325075C 11.125 23.425076 11.725 22.825075 12.625 22.825075L 20.125 22.825075C 21.025 22.825075 21.625 23.425076 21.625 24.325075L 21.625 31.825001ZM 44.875 30.625C 44.875 31.525002 44.275002 32.125 43.375 32.125L 38.125 32.125C 37.224998 32.125 36.625 31.525002 36.625 30.625L 36.625 25.375C 36.625 24.474998 37.224998 23.875 38.125 23.875L 43.375 23.875C 44.275002 23.875 44.875 24.474998 44.875 25.375L 44.875 30.625ZM 44.875 17.875C 44.875 18.775 44.275002 19.375 43.375 19.375L 38.125 19.375C 37.224998 19.375 36.625 18.775 36.625 17.875L 36.625 12.625C 36.625 11.725 37.224998 11.125 38.125 11.125L 43.375 11.125C 44.275002 11.125 44.875 11.725 44.875 12.625L 44.875 17.875ZM 44.875 43.375C 44.875 44.275002 44.275002 44.875 43.375 44.875L 38.125 44.875C 37.224998 44.875 36.625 44.275002 36.625 43.375L 36.625 38.125C 36.625 37.224998 37.224998 36.625 38.125 36.625L 43.375 36.625C 44.275002 36.625 44.875 37.224998 44.875 38.125L 44.875 43.375ZM 20.857599 22.984375L 31.974998 15.625M 10 10M 21.625 28.075001L 32.125 28.075001M 10 10M 28.825001 24.625L 32.125 28.075001L 28.825001 31.375M 10 10M 27.474998 14.575075L 32.125 15.625075L 31.075001 20.275061M 10 10M 20.857599 33.165398L 31.974998 40.524849M 10 10M 27.474998 41.574997L 32.125 40.525002L 31.075001 35.875">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-tx_offlinef_1hgxzz514aqtq8-stroke" data-item-order="0" transform="translate(848, 218)"></g>
-            <g id="g-root-tx_manualte_qss12914aqupv-stroke" data-item-order="0" transform="translate(668, 218)"></g>
-            <g id="g-root-tx_balancin_5v0bl14ah24l-stroke" data-item-order="0" transform="translate(80, 320)"></g>
-            <g id="g-root-tx_gitimpro_1luw2u914aqtxj-stroke" data-item-order="0" transform="translate(488, 314)"></g>
-            <g id="g-root-tx_moduleba_dhxzs114aqt50-stroke" data-item-order="0" transform="translate(662, 314)"></g>
-            <g id="g-root-tx_optimist_18lazq914aquix-stroke" data-item-order="0" transform="translate(866, 302)"></g>
-            <g id="g-root-tx_security_1qbyj4x14aqvbi-stroke" data-item-order="0" transform="translate(656, 506)"></g>
-            <g id="g-root-ic_spea_1lw510h14ah0cm-stroke" data-item-order="0" transform="translate(38, 410)">
-              <g id="ic_spea_1lw510h14ah0cm-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
-                <g>
-                  <path
-                    d="M 23.02 14.815001C 23.484394 15.536753 23.484394 16.463247 23.02 17.184999M 32.98 14.815001C 32.515606 15.536753 32.515606 16.463247 32.98 17.184999M 25.255001 13L 25.255001 13C 26.053761 13.793994 26.502903 14.873747 26.502903 16C 26.502903 17.126253 26.053761 18.206005 25.255001 19L 25.255001 19M 30.744999 13L 30.744999 13C 29.946238 13.793994 29.497097 14.873747 29.497097 16C 29.497097 17.126253 29.946238 18.206005 30.744999 19L 30.744999 19M 35.5 16.75C 35.5 18.821068 37.178932 20.5 39.25 20.5C 41.321068 20.5 43 18.821068 43 16.75C 43 14.678932 41.321068 13 39.25 13C 37.178932 13 35.5 14.678932 35.5 16.75M 45.25 28C 45.25 24.686291 42.563709 22 39.25 22C 35.936291 22 33.25 24.686291 33.25 28L 33.25 33.25L 36.369999 33.25L 37 43L 41.5 43L 42.130001 33.25L 45.25 33.25ZM 13 16.75C 13 18.821068 14.678932 20.5 16.75 20.5C 18.821068 20.5 20.5 18.821068 20.5 16.75C 20.5 14.678932 18.821068 13 16.75 13C 14.678932 13 13 14.678932 13 16.75M 21.115 25.705C 20.759916 23.570747 18.913589 22.006222 16.75 22.006222C 14.586411 22.006222 12.740085 23.570747 12.385 25.705L 10.75 35.5L 13.87 35.5L 14.5 43L 19 43L 19.630001 35.5L 22.75 35.5Z">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-tx_latencym_v6q3xd14aqux5-stroke" data-item-order="0" transform="translate(314, 218)"></g>
-            <g id="g-root-tx_uxdesign_dg2kip14aqu4j-stroke" data-item-order="0" transform="translate(308, 410)"></g>
-            <g id="g-root-tx_challeng_143m2ch14ah0jn-stroke" data-item-order="0" transform="translate(80, 224)"></g>
-            <g id="g-root-tx_reviewse_1hf2kpt14aqups-stroke" data-item-order="0" transform="translate(488, 410)"></g>
-            <g id="g-root-ic_opti_m97of514ae8ln-stroke" data-item-order="0" transform="translate(38, 218)">
-              <g id="ic_opti_m97of514ae8ln-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
-                <g>
-                  <path
-                    d="M 28 23.785L 14.965 23.785C 12.63716 23.785057 10.750103 25.672161 10.750103 28C 10.750103 30.327839 12.63716 32.214943 14.965 32.215L 23.785 32.215L 23.785 41.035C 23.785057 43.362839 25.672161 45.249897 28 45.249897C 30.327839 45.249897 32.214943 43.362839 32.215 41.034996L 32.215 28C 32.215 25.672119 30.327881 23.785 28 23.785ZM 41.035 10.75L 28 10.75C 25.672161 10.750057 23.785103 12.63716 23.785103 14.965C 23.785103 17.292839 25.672161 19.179943 28 19.18L 36.82 19.18L 36.82 28C 36.819942 30.327919 38.707077 32.215103 41.034996 32.215103C 43.362923 32.215103 45.250057 30.327919 45.25 28L 45.25 14.965C 45.25 12.637119 43.362881 10.75 41.034996 10.75ZM 10.75 28C 10.749943 30.327919 12.637079 32.215103 14.965 32.215103C 17.292921 32.215103 19.180056 30.327919 19.18 28C 19.180056 25.672079 17.292921 23.784897 14.965 23.784897C 12.637079 23.784897 10.749943 25.672079 10.75 28">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-tx_technica_1lw510h14aqw3r-stroke" data-item-order="0" transform="translate(866, 134)"></g>
-            <g id="g-root-tx_communic_hydyzl14al6v6-stroke" data-item-order="0" transform="translate(80, 416)"></g>
-            <g id="g-root-tx_performa_4mazj514aqtxp-stroke" data-item-order="0" transform="translate(656, 410)"></g>
-            <g id="g-root-tx_modulara_v9uhcx14aqw3u-stroke" data-item-order="0" transform="translate(836, 398)"></g>
-            <g id="g-root-tx_qualitya_v8lj6p14aqtxm-stroke" data-item-order="0" transform="translate(674, 122)"></g>
-            <g id="g-root-ic_grad_1useich14al91n-stroke" data-item-order="0" transform="translate(38, 506)">
-              <g id="ic_grad_1useich14al91n-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
-                <g>
-                  <path
-                    d="M 32.049999 19.7395L 23.747499 16.183001C 23.470936 16.065184 23.291439 15.793614 23.291439 15.493C 23.291439 15.192386 23.470936 14.920816 23.747499 14.802999L 32.049999 11.2465C 32.427391 11.084721 32.854607 11.084721 33.231998 11.2465L 43.140999 15.493L 33.230499 19.7395C 32.853539 19.90085 32.42696 19.90085 32.049999 19.7395ZM 38.6395 17.422001L 38.6395 22.521999C 38.639488 22.805832 38.479256 23.065344 38.225498 23.192501L 33.310001 25.657C 32.887882 25.867933 32.391117 25.867933 31.969 25.657L 27.055 23.200001C 26.800663 23.073261 26.639793 22.813667 26.6395 22.529499L 26.6395 17.429501M 43.1395 15.493L 43.1395 20.743M 43.1395 20.743L 45.198997 26.236C 45.24308 26.351183 45.227463 26.480703 45.157265 26.582106C 45.087063 26.683508 44.971329 26.743717 44.848 26.743L 41.431 26.743C 41.307671 26.743717 41.191936 26.683508 41.121735 26.582106C 41.051533 26.480703 41.035912 26.351183 41.079998 26.236L 43.1395 20.743M 37.4305 30.382C 36.86129 33.474384 35.128429 36.230965 32.588497 38.084499L 32.588501 44.875M 19.987 44.875L 19.987 41.095001L 18.726999 41.095001C 16.640535 41.093346 14.949999 39.401466 14.95 37.315002L 14.95 33.533501L 11.407 33.533501C 11.205226 33.534309 11.015332 33.43819 10.896512 33.275112C 10.777692 33.11203 10.744395 32.901817 10.807 32.709999C 12.916 26.179001 14.5 19.217501 20.3785 16.789">
-                  </path>
-                </g>
-              </g>
-            </g>
-            <g id="g-root-tx_teamcoll_4m25d14aqvph-stroke" data-item-order="0" transform="translate(488, 122)"></g>
-            <g id="g-root-tx_systemli_4kfk9t14aqux8-stroke" data-item-order="0" transform="translate(314, 506)"></g>
-            <g id="g-root-tx_aiintegr_142d46914aqu4g-stroke" data-item-order="0" transform="translate(314, 134)"></g>
-            <g id="g-root-tx_learning_1448jfl14aqt4x-stroke" data-item-order="0" transform="translate(506, 494)"></g>
-            <g id="g-root-tx_characte_zko6sh14ae70q-stroke" data-item-order="0" transform="translate(38, 134)"></g>
-            <g id="g-root-tx_challeng_18gb71d14ae681-stroke" data-item-order="0" transform="translate(309, 38)"></g>
-            <g id="g-root-tx_knowledg_18i6map14aqtc7-stroke" data-item-order="0" transform="translate(80, 512)"></g>
-            <g id="g-root-tx_distribu_1qapkyp14aqt5a-stroke" data-item-order="0" transform="translate(506, 206)"></g>
-          </g>
-        </g>
-      </svg>
+    <div class="lessons-container">
+      <!-- Technology Stack Lessons -->
+      <div class="lesson-card methodology">
+        <div class="card-header">
+          <div class="card-icon">TS</div>
+          <h2 class="card-title">Technology Stack Decisions</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge lesson-section">
+            <span class="label">Challenge:</span>
+            <span class="content">Cross-platform development with API stability concerns</span>
+          </div>
+          <div class="solution lesson-section">
+            <span class="label">Solution:</span>
+            <span class="content">Expo's managed workflow for rapid builds</span>
+          </div>
+          <div class="learning lesson-section">
+            <span class="label">Learning:</span>
+            <span class="content">Need to stabilize API versions and schedule tech-debt sprints</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Collaboration -->
+      <div class="lesson-card collaboration">
+        <div class="card-header">
+          <div class="card-icon">TC</div>
+          <h2 class="card-title">Team Collaboration Process</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge lesson-section">
+            <span class="label">Challenge:</span>
+            <span class="content">Remote pairing challenges across distributed team</span>
+          </div>
+          <div class="solution lesson-section">
+            <span class="label">Solution:</span>
+            <span class="content">Kanban boards for transparency + async code reviews</span>
+          </div>
+          <div class="learning lesson-section">
+            <span class="label">Learning:</span>
+            <span class="content">Clear communication protocols + async reviews are superior</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- AI Development Process -->
+      <div class="lesson-card ai-process">
+        <div class="card-header">
+          <div class="card-icon">AI</div>
+          <h2 class="card-title">AI Integration Methodology</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge lesson-section">
+            <span class="label">Challenge:</span>
+            <span class="content">Securing AI keys and achieving quality AI responses</span>
+          </div>
+          <div class="solution lesson-section">
+            <span class="label">Solution:</span>
+            <span class="content">Cloud Functions secured AI keys + iterative prompt engineering</span>
+          </div>
+          <div class="learning lesson-section">
+            <span class="label">Learning:</span>
+            <span class="content">Importance of budgeting dedicated time for AI tuning</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- QA Strategy -->
+      <div class="lesson-card qa-strategy">
+        <div class="card-header">
+          <div class="card-icon">QA</div>
+          <h2 class="card-title">Quality Assurance Strategy</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge lesson-section">
+            <span class="label">Challenge:</span>
+            <span class="content">Catching UX polish issues effectively</span>
+          </div>
+          <div class="solution lesson-section">
+            <span class="label">Solution:</span>
+            <span class="content">Manual exploratory testing with 160+ structured test cases</span>
+          </div>
+          <div class="learning lesson-section">
+            <span class="label">Learning:</span>
+            <span class="content">Future need for combining manual + automated unit tests (Jest + RTL)</span>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </body>
+
+</html>
 
 </html>
