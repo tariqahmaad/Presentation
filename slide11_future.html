@@ -11,11 +11,11 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #f0f0f0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0F0A1A 0%, #1A0F2E 50%, #2D1B4E 100%);
       font-family: 'Poppins', sans-serif;
       overflow: hidden;
     }
@@ -23,13 +23,42 @@
     .slide {
       width: 1280px;
       height: 720px;
-      position: relative;
-      overflow: hidden;
-      background-color: #0a1024;
+      box-sizing: border-box;
+      background: linear-gradient(135deg, #0F0A1A 0%, #1A0F2E 20%, #2D1B4E 60%, #4A2C5A 100%);
+      color: #FFFFFF;
       display: flex;
       flex-direction: column;
-      color: #ffffff;
-      box-sizing: border-box;
+      padding: 40px 50px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(253, 179, 71, 0.06) 10%, transparent 11%),
+        radial-gradient(circle, rgba(138, 43, 226, 0.08) 10%, transparent 11%);
+      background-size: 45px 45px, 65px 65px;
+      opacity: 0.3;
+      animation: moveBackground 90s linear infinite;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+      z-index: 2;
     }
 
     .background {
@@ -65,171 +94,199 @@
       box-sizing: border-box;
     }
 
-    .main-title {
-      font-size: 44px;
-      font-weight: 700;
+    .slide-header {
       text-align: center;
-      margin: 0 0 20px 0;
-      color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      animation: slideInDown 0.8s ease-out;
+      margin-bottom: 25px;
+      /* Slightly more space */
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .slide h1 {
+      font-size: 52px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 30px 0;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #FDB347;
+      animation: fadeIn 1s ease-out;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .content-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      width: 100%;
     }
 
     .features-grid {
+      width: 100%;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      flex-grow: 1;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      max-width: 1100px;
+      box-sizing: border-box;
     }
 
     .feature-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(26, 15, 46, 0.4);
       border-radius: 12px;
-      padding: 12px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 8px 32px rgba(138, 43, 226, 0.15);
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 0.6s ease-out forwards;
+      animation: slideInUp 0.8s ease-out forwards;
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
     }
 
     .feature-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(253, 179, 71, 0.15);
     }
 
     .feature-card h3 {
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 600;
-      color: #3b82f6;
-      margin-top: 0;
-      margin-bottom: 8px;
-      padding-bottom: 6px;
-      border-bottom: 2px solid #10b981;
+      color: #FDB347;
+      margin: 0 0 8px 0;
+      border-left: 4px solid #FDB347;
+      padding-left: 10px;
+      text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
     }
 
     .feature-card ul {
       list-style: none;
-      padding: 0;
+      padding-left: 5px;
       margin: 0;
     }
 
     .feature-card li {
-      font-size: 13px;
-      font-weight: 300;
-      color: #e0e7ff;
-      line-height: 1.5;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: flex-start;
+      font-size: 17px;
+      line-height: 1.4;
+      color: #F8F9FA;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      padding-left: 22px;
+      position: relative;
+      margin-bottom: 5px;
+      opacity: 0;
+      animation: slideInUp 0.6s ease-out forwards;
+      transition: color 0.3s ease;
+    }
+
+    .feature-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-card li:hover {
+      color: #FDB347;
     }
 
     .feature-card li::before {
-      content: '▶';
-      font-size: 10px;
-      color: #10b981;
-      margin-right: 8px;
-      margin-top: 3px;
-      flex-shrink: 0;
+      content: '●';
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      color: #12B76A;
+      font-weight: bold;
+      font-size: 16px;
+      text-shadow: 0 0 8px rgba(18, 183, 106, 0.6);
     }
 
-    /* Staggered animation delays */
-    .feature-card:nth-child(1) {
+    /* Animation Delays */
+    .features-grid .feature-card:nth-child(1) {
       animation-delay: 0.2s;
     }
 
-    .feature-card:nth-child(2) {
-      animation-delay: 0.3s;
-    }
-
-    .feature-card:nth-child(3) {
+    .features-grid .feature-card:nth-child(2) {
       animation-delay: 0.4s;
     }
 
-    .feature-card:nth-child(4) {
-      animation-delay: 0.5s;
-    }
-
-    .feature-card:nth-child(5) {
+    .features-grid .feature-card:nth-child(3) {
       animation-delay: 0.6s;
     }
 
-    .feature-card:nth-child(6) {
-      animation-delay: 0.7s;
+    /* Progressive list item animation */
+    .feature-card:nth-child(1) li:nth-child(1) {
+      animation-delay: 0.8s;
     }
 
-    .timeline-section {
-      margin-top: 15px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(59, 130, 246, 0.3);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.9s forwards;
+    .feature-card:nth-child(1) li:nth-child(2) {
+      animation-delay: 1.0s;
     }
 
-    .timeline {
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      width: 90%;
-      margin: 15px auto 0 auto;
+    .feature-card:nth-child(1) li:nth-child(3) {
+      animation-delay: 1.2s;
     }
 
-    .timeline::before {
-      content: '';
-      position: absolute;
-      top: 10px;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #3b82f6, #10b981);
-      border-radius: 2px;
-      z-index: 0;
+    .feature-card:nth-child(1) li:nth-child(4) {
+      animation-delay: 1.4s;
     }
 
-    .timeline-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      width: 22%;
+    .feature-card:nth-child(2) li:nth-child(1) {
+      animation-delay: 1.0s;
     }
 
-    .timeline-point {
-      width: 20px;
-      height: 20px;
-      background-color: #1e3a8a;
-      border: 3px solid #10b981;
-      border-radius: 50%;
-      z-index: 1;
-      transition: transform 0.3s ease;
+    .feature-card:nth-child(2) li:nth-child(2) {
+      animation-delay: 1.2s;
     }
 
-    .timeline-item:hover .timeline-point {
-      transform: scale(1.3);
+    .feature-card:nth-child(2) li:nth-child(3) {
+      animation-delay: 1.4s;
     }
 
-    .timeline-date {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-top: 12px;
+    .feature-card:nth-child(2) li:nth-child(4) {
+      animation-delay: 1.6s;
     }
 
-    .timeline-content {
-      font-size: 13px;
-      color: #e0e7ff;
-      text-align: center;
-      margin-top: 4px;
-      font-weight: 400;
+    .feature-card:nth-child(3) li:nth-child(1) {
+      animation-delay: 1.2s;
+    }
+
+    .feature-card:nth-child(3) li:nth-child(2) {
+      animation-delay: 1.4s;
+    }
+
+    .feature-card:nth-child(3) li:nth-child(3) {
+      animation-delay: 1.6s;
+    }
+
+    .feature-card:nth-child(3) li:nth-child(4) {
+      animation-delay: 1.8s;
     }
 
     /* Animations */
-    @keyframes slideInDown {
+    @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
       }
 
       to {
@@ -249,103 +306,94 @@
         transform: translateY(0);
       }
     }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(200px, 200px) rotate(360deg);
+      }
+    }
+
+    /* Decorative elements */
+    .accent-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #FDB347;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(253, 179, 71, 0.6);
+    }
+
+    .accent-dot.top-right {
+      top: 25px;
+      right: 25px;
+      animation: pulse 3s infinite;
+    }
+
+    .accent-dot.bottom-left {
+      bottom: 25px;
+      left: 25px;
+      animation: pulse 3s infinite 1.5s;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="slide">
-    <div class="background"></div>
-    <div class="overlay"></div>
-    <div class="content">
-      <h1 class="main-title">Future Enhancements & Roadmap</h1>
+    <div class="accent-dot top-right"></div>
+    <div class="accent-dot bottom-left"></div>
 
+    <h1>Future Enhancements & Roadmap</h1>
+
+    <div class="content-wrapper">
       <div class="features-grid">
         <div class="feature-card">
-          <h3>Open-Banking Integrations</h3>
+          <h3>AI & Banking Integration</h3>
           <ul>
-            <li>Direct integration with major financial institutions</li>
-            <li>Real-time transaction synchronization</li>
-            <li>Unified view across multiple banking relationships</li>
-            <li>PSD2 and Open Banking standards implementation</li>
-          </ul>
-        </div>
-
-        <div class="feature-card">
-          <h3>Advanced AI Features</h3>
-          <ul>
+            <li>Direct bank integration & real-time sync</li>
             <li>Predictive cash flow forecasting</li>
-            <li>Intelligent budget optimization suggestions</li>
-            <li>Unusual spending pattern identification & alerts</li>
-            <li>Enhanced conversational AI with financial expertise</li>
+            <li>Smart budget optimization</li>
+            <li>Anomaly detection & alerts</li>
           </ul>
         </div>
 
         <div class="feature-card">
-          <h3>Enhanced Social Features</h3>
+          <h3>Social & Global Features</h3>
           <ul>
-            <li>Shared financial management for households</li>
-            <li>Advanced group expense splitting & sharing</li>
-            <li>Collaborative savings & investment planning</li>
-            <li>Community-based spending insights</li>
+            <li>Household financial management</li>
+            <li>Group expense splitting & collaboration</li>
+            <li>Multi-language & currency support</li>
+            <li>Enhanced accessibility features</li>
           </ul>
         </div>
 
         <div class="feature-card">
-          <h3>Localization & Accessibility</h3>
+          <h3>Security & Analytics</h3>
           <ul>
-            <li>Multi-language support for global markets</li>
-            <li>Regional currency & institution integration</li>
-            <li>Enhanced support for users with disabilities</li>
-            <li>Region-specific financial management practices</li>
-          </ul>
-        </div>
-
-        <div class="feature-card">
-          <h3>Technical Improvements</h3>
-          <ul>
-            <li>Enhanced caching and data processing</li>
-            <li>Biometric authentication & zero-knowledge architecture</li>
-            <li>Decentralized financial data management options</li>
-            <li>Smart device connectivity for expense tracking</li>
-          </ul>
-        </div>
-
-        <div class="feature-card">
-          <h3>Business Intelligence</h3>
-          <ul>
-            <li>Comprehensive financial health scoring</li>
-            <li>Portfolio management & performance analysis</li>
-            <li>Automated tax document generation</li>
-            <li>Detailed financial health reports & insights</li>
+            <li>Biometric authentication & encryption</li>
+            <li>Financial health scoring & insights</li>
+            <li>Portfolio analysis & reporting</li>
+            <li>Smart device connectivity</li>
           </ul>
         </div>
       </div>
-
-      <div class="timeline-section">
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-point"></div>
-            <div class="timeline-date">Q3 2025</div>
-            <div class="timeline-content">Open-banking Integration Pilot</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-point"></div>
-            <div class="timeline-date">Q4 2025</div>
-            <div class="timeline-content">Advanced AI Features Rollout</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-point"></div>
-            <div class="timeline-date">Q1 2026</div>
-            <div class="timeline-content">Family Workspaces & Social</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-point"></div>
-            <div class="timeline-date">Q2 2026</div>
-            <div class="timeline-content">Full Localization & Accessibility</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </body>

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BudgetWise Project - Thank You</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-    body, html {
+    body,
+    html {
       margin: 0;
       padding: 0;
       width: 100%;
@@ -15,20 +17,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #111;
+      background-color: #020617;
+      /* Consistent background */
+      font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      /* Consistent font */
     }
 
     .slide {
       width: 1280px;
       height: 720px;
-      background: linear-gradient(135deg, #1e3a8a 0%, #1c2a5a 100%);
-      position: relative;
-      overflow: hidden;
+      box-sizing: border-box;
+      background-color: #0f172a;
+      /* Consistent slide background */
+      color: #cbd5e1;
+      /* Consistent text color */
       display: flex;
       flex-direction: column;
-      align-items: center;
-      font-family: 'Poppins', sans-serif;
-      color: #e0e0e0;
+      padding: 35px 50px;
+      position: relative;
+      overflow: hidden;
       opacity: 0;
       animation: slideFadeIn 1s ease-out forwards;
     }
@@ -36,14 +43,27 @@
     .slide::before {
       content: '';
       position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 80%, rgba(253, 179, 71, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 40%);
+      background-size: 300px 300px, 400px 400px;
+      opacity: 0.8;
+      animation: moveBackground 90s linear infinite;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background-image:
-        radial-gradient(circle at 15% 85%, rgba(59, 130, 246, 0.15), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.1), transparent 40%);
-      z-index: 1;
+      height: 6px;
+      background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+      z-index: 2;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .content-wrapper {
@@ -54,43 +74,59 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 60px;
       box-sizing: border-box;
+      padding: 20px 0;
     }
 
     .title {
-      font-size: 110px;
+      font-size: 72px;
+      /* Adjusted size for better fit */
       font-weight: 700;
-      color: #f59e0b;
-      margin: 40px 0 10px 0;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      color: #FFFFFF;
+      margin: 30px 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 4px solid #FDB347;
+      /* Consistent accent color */
+      text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.6);
+      /* Consistent text shadow */
+      background: linear-gradient(135deg, #FFFFFF 0%, #E0E7FF 100%);
+      /* Consistent gradient */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       opacity: 0;
       animation: fadeInDown 0.8s 0.5s ease-out forwards;
     }
 
     .subtitle {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 400;
-      margin: 0;
+      margin: 0 0 20px 0;
+      color: #cbd5e1;
+      /* Consistent text color */
       opacity: 0;
       animation: fadeIn 1s 0.8s ease-out forwards;
     }
 
     .qna-box {
-      margin: 25px 0;
+      margin: 20px 0;
       padding: 15px 40px;
-      border: 2px solid rgba(245, 158, 11, 0.7);
-      border-radius: 50px;
-      background-color: rgba(245, 158, 11, 0.1);
+      border: 2px solid rgba(253, 179, 71, 0.3);
+      /* Consistent accent color */
+      border-radius: 15px;
+      background: rgba(15, 23, 42, 0.6);
+      /* Consistent with other cards */
+      backdrop-filter: blur(10px);
       opacity: 0;
       animation: fadeIn 1s 1.1s ease-out forwards;
     }
-    
+
     .qna-box p {
-        font-size: 20px;
-        font-weight: 600;
-        color: #facc15;
-        margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #FDB347;
+      /* Consistent accent color */
+      margin: 0;
     }
 
     .footer {
@@ -98,7 +134,7 @@
       justify-content: space-between;
       width: 100%;
       margin-top: auto;
-      padding-bottom: 20px;
+      gap: 30px;
     }
 
     .column {
@@ -106,18 +142,26 @@
       opacity: 0;
       animation: fadeInUp 1s 1.4s ease-out forwards;
     }
-    
-    .column:nth-child(2) { animation-delay: 1.6s; }
-    .column:nth-child(3) { animation-delay: 1.8s; }
+
+    .column:nth-child(2) {
+      animation-delay: 1.6s;
+    }
+
+    .column:nth-child(3) {
+      animation-delay: 1.8s;
+    }
 
     .column h3 {
-      font-size: 20px;
-      font-weight: 600;
-      color: #f59e0b;
+      font-size: 18px;
+      font-weight: 700;
+      /* Bolder for consistency */
+      color: #FDB347;
+      /* Consistent accent color */
       margin-top: 0;
       margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #FDB347;
+      /* Consistent accent color */
     }
 
     .column ul {
@@ -129,19 +173,24 @@
     .column li {
       margin-bottom: 8px;
       font-size: 14px;
+      color: #e0e7ff;
+      /* Consistent with other slides */
     }
-    
+
     .column p {
-        font-size: 14px;
-        line-height: 1.6;
-        margin: 0 0 8px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0 0 8px 0;
+      color: #e0e7ff;
+      /* Consistent with other slides */
     }
-    
+
     .column p strong {
-        color: #9ca3af;
-        font-weight: 600;
-        display: inline-block;
-        width: 80px;
+      color: #FDB347;
+      /* Consistent accent color */
+      font-weight: 600;
+      display: inline-block;
+      width: 80px;
     }
 
     .highlight-list li {
@@ -149,6 +198,8 @@
       align-items: flex-start;
       margin-bottom: 12px;
       font-size: 14px;
+      color: #e0e7ff;
+      /* Consistent with other slides */
     }
 
     .highlight-list .check-icon {
@@ -157,36 +208,74 @@
       margin-right: 10px;
       flex-shrink: 0;
       margin-top: 2px;
-      fill: #34d399;
+      fill: #10b981;
+      /* Consistent green color */
     }
 
     /* Animations */
     @keyframes slideFadeIn {
-        from { opacity: 0; }
-        to   { opacity: 1; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(300px, 300px) rotate(360deg);
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <div class="slide">
     <div class="content-wrapper">
       <h1 class="title">Thank You</h1>
       <p class="subtitle">Thank you for your attention and interest in the BudgetWise project.</p>
-      
+
       <div class="qna-box">
         <p>We welcome your questions and feedback about our BudgetWise graduation project.</p>
       </div>
@@ -216,19 +305,35 @@
           <h3>Key Project Highlights</h3>
           <ul class="highlight-list">
             <li>
-              <svg class="check-icon" viewBox="0 0 20 20"><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z"></path></svg>
+              <svg class="check-icon" viewBox="0 0 20 20">
+                <path
+                  d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z">
+                </path>
+              </svg>
               <span>95% test pass rate with zero critical defects</span>
             </li>
             <li>
-              <svg class="check-icon" viewBox="0 0 20 20"><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z"></path></svg>
+              <svg class="check-icon" viewBox="0 0 20 20">
+                <path
+                  d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z">
+                </path>
+              </svg>
               <span>Sub-3-second performance with AI integration</span>
             </li>
             <li>
-              <svg class="check-icon" viewBox="0 0 20 20"><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z"></path></svg>
+              <svg class="check-icon" viewBox="0 0 20 20">
+                <path
+                  d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z">
+                </path>
+              </svg>
               <span>Cross-platform React Native implementation</span>
             </li>
             <li>
-              <svg class="check-icon" viewBox="0 0 20 20"><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z"></path></svg>
+              <svg class="check-icon" viewBox="0 0 20 20">
+                <path
+                  d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z">
+                </path>
+              </svg>
               <span>Enterprise-grade security and GDPR compliance</span>
             </li>
           </ul>
@@ -238,4 +343,5 @@
   </div>
 
 </body>
+
 </html>
