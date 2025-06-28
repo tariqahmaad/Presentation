@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Overview & Abstract</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0F0A1A 0%, #1A0F2E 50%, #2D1B4E 100%);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      box-sizing: border-box;
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #0F0A1A 0%, #1A0F2E 20%, #2D1B4E 60%, #4A2C5A 100%);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(253, 179, 71, 0.06) 10%, transparent 11%),
+        radial-gradient(circle, rgba(138, 43, 226, 0.08) 10%, transparent 11%);
+      background-size: 45px 45px, 65px 65px;
+      opacity: 0.3;
+      animation: moveBackground 90s linear infinite;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(200px, 200px) rotate(360deg);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 10px 0;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #FDB347;
+      animation: fadeIn 1s ease-out;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .content-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      flex-grow: 1;
+      margin-top: 10px;
+      z-index: 1;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section {
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out forwards;
+      background: rgba(26, 15, 46, 0.4);
+      border-radius: 12px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 8px 32px rgba(138, 43, 226, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(253, 179, 71, 0.15);
+    }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #FDB347;
+      margin: 0 0 10px 0;
+      border-left: 4px solid #FDB347;
+      padding-left: 12px;
+      text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
+      position: relative;
+    }
+
+    .section h2::after {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      /* background: #007AFF; */
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 122, 255, 0.6);
+    }
+
+    .section p,
+    .section li {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #F8F9FA;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .section ul {
+      list-style: none;
+      padding-left: 10px;
+      margin: 0;
+    }
+
+    .section li {
+      padding-left: 25px;
+      position: relative;
+      margin-bottom: 6px;
+      opacity: 0;
+      animation: slideInUp 0.6s ease-out forwards;
+      transition: color 0.3s ease;
+    }
+
+    .section li:hover {
+      color: #FDB347;
+    }
+
+    .section li::before {
+      content: '●';
+      position: absolute;
+      left: 8px;
+      top: 2px;
+      color: #12B76A;
+      font-weight: bold;
+      font-size: 16px;
+      text-shadow: 0 0 8px rgba(18, 183, 106, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    .section li strong {
+      color: #007AFF;
+      font-weight: 600;
+    }
+
+    .impact-metrics li {
+      padding: 8px 12px;
+      padding-left: 25px;
+      margin-bottom: 8px;
+      font-size: 16px;
+      border-left: 3px solid #12B76A;
+      margin-left: 0px;
+      background: rgba(18, 183, 106, 0.1);
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .impact-metrics li::before {
+      content: '●';
+      position: absolute;
+      left: 12px;
+      top: 9px;
+      color: #12B76A;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .impact-metrics li strong {
+      color: #12B76A;
+      font-size: 16px;
+    }
+
+    /* Animation Delays */
+    .section:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .section:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .section:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .column:nth-child(2) .section:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    .column:nth-child(2) .section:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    /* Progressive list item animation */
+    .tech-stack li:nth-child(1) {
+      animation-delay: 0.8s;
+    }
+
+    .tech-stack li:nth-child(2) {
+      animation-delay: 1.0s;
+    }
+
+    .tech-stack li:nth-child(3) {
+      animation-delay: 1.2s;
+    }
+
+    .core-modules li:nth-child(1) {
+      animation-delay: 1.0s;
+    }
+
+    .core-modules li:nth-child(2) {
+      animation-delay: 1.2s;
+    }
+
+    .core-modules li:nth-child(3) {
+      animation-delay: 1.4s;
+    }
+
+    .core-modules li:nth-child(4) {
+      animation-delay: 1.6s;
+    }
+
+    .impact-metrics li:nth-child(1) {
+      animation-delay: 0.8s;
+    }
+
+    .impact-metrics li:nth-child(2) {
+      animation-delay: 1.0s;
+    }
+
+    .impact-metrics li:nth-child(3) {
+      animation-delay: 1.2s;
+    }
+
+    /* Decorative elements */
+    .accent-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #FDB347;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(253, 179, 71, 0.6);
+    }
+
+    .accent-dot.top-right {
+      top: 25px;
+      right: 25px;
+      animation: pulse 3s infinite;
+    }
+
+    .accent-dot.bottom-left {
+      bottom: 25px;
+      left: 25px;
+      animation: pulse 3s infinite 1.5s;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide">
+    <div class="accent-dot top-right"></div>
+    <div class="accent-dot bottom-left"></div>
+
+    <h1>Project Overview & Abstract</h1>
+    <div class="content-container">
+      <div class="column">
+        <div class="section">
+          <h2>Project Purpose</h2>
+          <ul class="tech-stack">
+            <li><strong>Mission:</strong> Comprehensive AI-powered personal finance management</li>
+            <li><strong>Problem Solved:</strong> Fragmented financial data across multiple platforms</li>
+            <li><strong>Approach:</strong> Intelligent automation for seamless expense tracking</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Target Users</h2>
+          <ul class="impact-metrics">
+            <li><strong>Students</strong> managing limited budgets</li>
+            <li><strong>Professionals</strong> tracking daily expenses</li>
+            <li><strong>Families</strong> managing household finances</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="section">
+          <h2>Core Innovation</h2>
+          <p><strong>AI-First Financial Management:</strong> First mobile solution combining intelligent categorization,
+            social debt tracking, and sub-5-second financial insights in one unified platform.</p>
+        </div>
+
+        <div class="section">
+          <h2>Project Scope</h2>
+          <ul class="core-modules">
+            <li><strong>Cross-Platform Application:</strong> Native iOS & Android experience</li>
+            <li><strong>Real-Time Synchronization:</strong> Seamless multi-device access</li>
+            <li><strong>Offline-First Architecture:</strong> Works without internet connectivity</li>
+            <li><strong>Comprehensive Financial Ecosystem:</strong> All-in-one money management</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Value Proposition</h2>
+          <p><strong>One App, Complete Financial Control:</strong> Eliminates the need for multiple finance apps through
+            intelligent automation and personalized insights.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

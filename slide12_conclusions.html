@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conclusions</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: #E2E8F0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 45px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 6px 0;
+      background: linear-gradient(135deg, #FFFFFF 0%, #93C5FD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .header::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, #3B82F6, #10B981);
+      margin: 0 auto;
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 12px;
+      flex-grow: 1;
+      /* position: relative; */
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.6) 100%);
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: slideInScale 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3B82F6, #10B981, #8B5CF6);
+      border-radius: 12px 12px 0 0;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    @keyframes slideInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .card:nth-child(1) .card-icon {
+      background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+    }
+
+    .card:nth-child(2) .card-icon {
+      background: linear-gradient(135deg, #10B981, #059669);
+    }
+
+    .card:nth-child(3) .card-icon {
+      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    }
+
+    .card:nth-child(4) .card-icon {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+    }
+
+    .card:nth-child(5) .card-icon {
+      background: linear-gradient(135deg, #EF4444, #DC2626);
+    }
+
+    .card:nth-child(6) .card-icon {
+      background: linear-gradient(135deg, #06B6D4, #0891B2);
+    }
+
+    .card p,
+    .card ul {
+      font-size: 15px;
+      line-height: 1.4;
+      color: #CBD5E1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card li {
+      padding-left: 22px;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .card li:last-child {
+      margin-bottom: 0;
+    }
+
+    .card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: #10B981;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .card li strong {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .final-statement {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 12px;
+      padding: 8px 14px;
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.3;
+      color: #E2E8F0;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.8s ease-out 0.8s forwards;
+      opacity: 0;
+    }
+
+    .final-statement::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #3B82F6, #10B981);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .svg-container {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .svg-container svg {
+      max-width: 170%;
+      max-height: 600px;
+      width: auto;
+      height: auto;
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide">
+    <div class="content-wrapper">
+      <div class="header">
+        <h1>Conclusions</h1>
+      </div>
+
+      <div class="grid-container">
+        <div class="svg-container">
+          <?xml version="1.0" encoding="utf-8" standalone="yes"?>
+          <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+          <svg viewBox="0 0 984 570"
+            style="fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <style class="text-font-style fontImports" data-font-family="Roboto">
+              @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');
+            </style>
+            <g id="items" style="isolation: isolate">
+              <g id="blend" style="mix-blend-mode: normal">
+                <g id="g-root-cp_1_g-1_4j789d17w4ow7-fill" data-item-order="-443654" transform="translate(62, 266)"></g>
+                <g id="g-root-cp_2_g-2_1q8urv517w4qa1-fill" data-item-order="-443626" transform="translate(278, 266)">
+                </g>
+                <g id="g-root-cp_3_g-3_1lt19qp17w4r2b-fill" data-item-order="-443598" transform="translate(494, 266)">
+                </g>
+                <g id="g-root-cp_4_g-4_18i78gh17w4phh-fill" data-item-order="-443570" transform="translate(710, 266)">
+                </g>
+                <g id="g-root-tx_projecta_zmk87l17w4qa7-fill" data-item-order="0" transform="translate(332, 38)">
+                  <g id="tx_projecta_zmk87l17w4qa7-fill" stroke="none" fill="#f4f4f4">
+                    <g><text style="font: bold 25px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="25px" font-family="Roboto, sans-serif">
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-ic_trop_1qaq74h17w4paj-fill" data-item-order="0" transform="translate(98, 122)"></g>
+                <g id="g-root-ic_cont_1luwp0117wbs3m-fill" data-item-order="0" transform="translate(314, 122)"></g>
+                <g id="g-root-ic_lock_1qeh1n517wfz0n-fill" data-item-order="0" transform="translate(530, 122)"></g>
+                <g id="g-root-ic_exch_v48tqp17wisco-fill" data-item-order="0" transform="translate(746, 122)"></g>
+                <g id="g-root-tx_technica_dg36oh17w4q9t-fill" data-item-order="0" transform="translate(104, 278)">
+                  <g id="tx_technica_dg36oh17w4q9t-fill" stroke="none" fill="#ffe711">
+                    <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="20px" font-family="Roboto, sans-serif">
+                        <tspan x="20.45" y="34" dominant-baseline="ideographic">Technical </tspan>
+                        <tspan x="15.73" y="58" dominant-baseline="ideographic">Excellence</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_aiintegr_1cy0qkx17wbqq3-fill" data-item-order="0" transform="translate(308, 278)">
+                  <g id="tx_aiintegr_1cy0qkx17wbqq3-fill" stroke="none" fill="#f79438">
+                    <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="20px" font-family="Roboto, sans-serif">
+                        <tspan x="12.22" y="34" dominant-baseline="ideographic">AI Integration </tspan>
+                        <tspan x="35.66" y="58" dominant-baseline="ideographic">Success</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_security_zqxjtd17wfwuh-fill" data-item-order="0" transform="translate(512, 278)">
+                  <g id="tx_security_zqxjtd17wfwuh-fill" stroke="none" fill="#fb6762">
+                    <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="20px" font-family="Roboto, sans-serif">
+                        <tspan x="50.9" y="34" dominant-baseline="ideographic">Security </tspan>
+                        <tspan x="17.06" y="58" dominant-baseline="ideographic">Implementation</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_crosspla_hrjd7517wirrd-fill" data-item-order="0" transform="translate(734, 278)">
+                  <g id="tx_crosspla_hrjd7517wirrd-fill" stroke="none" fill="#f366bb">
+                    <g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="20px" font-family="Roboto, sans-serif">
+                        <tspan x="12.26" y="34" dominant-baseline="ideographic">Cross-platform </tspan>
+                        <tspan x="42.89" y="58" dominant-baseline="ideographic">Success</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_achieved_4kg6fl17w4r2i-fill" data-item-order="0" transform="translate(86, 338)">
+                  <g id="tx_achieved_4kg6fl17w4r2i-fill" stroke="none" fill="#ffe711">
+                    <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
+                        font-family="Roboto, sans-serif">
+                        <tspan x="40.81" y="30.45" dominant-baseline="ideographic">Achieved all </tspan>
+                        <tspan x="12.61" y="48.45" dominant-baseline="ideographic">performance targets </tspan>
+                        <tspan x="18.56" y="66.45" dominant-baseline="ideographic">with 95% test pass </tspan>
+                        <tspan x="13.19" y="84.45" dominant-baseline="ideographic">rate and zero critical </tspan>
+                        <tspan x="53.96" y="102.45" dominant-baseline="ideographic">defects.</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_delivere_90w5n517wbp5b-fill" data-item-order="0" transform="translate(296, 338)">
+                  <g id="tx_delivere_90w5n517wbp5b-fill" stroke="none" fill="#f79438">
+                    <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
+                        font-family="Roboto, sans-serif">
+                        <tspan x="33.65" y="27.45" dominant-baseline="ideographic">Delivered sub-5-</tspan>
+                        <tspan x="17.13" y="45.45" dominant-baseline="ideographic">second AI responses </tspan>
+                        <tspan x="23.71" y="63.45" dominant-baseline="ideographic">with context-aware </tspan>
+                        <tspan x="28.54" y="81.45" dominant-baseline="ideographic">financial insights.</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_fullgdpr_hznjbl17wfz7o-fill" data-item-order="0" transform="translate(512, 338)">
+                  <g id="tx_fullgdpr_hznjbl17wfz7o-fill" stroke="none" fill="#fb6762">
+                    <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
+                        font-family="Roboto, sans-serif">
+                        <tspan x="53.83" y="27.45" dominant-baseline="ideographic">Full GDPR </tspan>
+                        <tspan x="17.58" y="45.45" dominant-baseline="ideographic">compliance with TLS </tspan>
+                        <tspan x="32.94" y="63.45" dominant-baseline="ideographic">1.3 and granular </tspan>
+                        <tspan x="32.2" y="81.45" dominant-baseline="ideographic">access controls.</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_seamless_1cviu8h17wipzh-fill" data-item-order="0" transform="translate(746, 338)">
+                  <g id="tx_seamless_1cviu8h17wipzh-fill" stroke="none" fill="#f366bb">
+                    <g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px"
+                        font-family="Roboto, sans-serif">
+                        <tspan x="35.51" y="30.45" dominant-baseline="ideographic">Seamless </tspan>
+                        <tspan x="27.55" y="48.45" dominant-baseline="ideographic">iOS/Android </tspan>
+                        <tspan x="15.97" y="66.45" dominant-baseline="ideographic">experience with </tspan>
+                        <tspan x="32.42" y="84.45" dominant-baseline="ideographic">offline-first </tspan>
+                        <tspan x="26.34" y="102.45" dominant-baseline="ideographic">architecture.</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_1_qrjp1t17w4oow-fill" data-item-order="0" transform="translate(146, 476)">
+                  <g id="tx_1_qrjp1t17w4oow-fill" stroke="none" fill="#ffe711">
+                    <g><text style="font: bold 30px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="30px" font-family="Roboto, sans-serif">
+                        <tspan x="13.39" y="45.64" dominant-baseline="ideographic">1</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_2_4j789d17wbqx4-fill" data-item-order="0" transform="translate(362, 476)">
+                  <g id="tx_2_4j789d17wbqx4-fill" stroke="none" fill="#f79438">
+                    <g><text style="font: bold 30px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="30px" font-family="Roboto, sans-serif">
+                        <tspan x="13.39" y="45.64" dominant-baseline="ideographic">2</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_3_v98mfl17wfyma-fill" data-item-order="0" transform="translate(578, 476)">
+                  <g id="tx_3_v98mfl17wfyma-fill" stroke="none" fill="#fb6762">
+                    <g><text style="font: bold 30px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="30px" font-family="Roboto, sans-serif">
+                        <tspan x="13.39" y="45.64" dominant-baseline="ideographic">3</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-tx_4_zs6hzl17whdzi-fill" data-item-order="0" transform="translate(794, 476)">
+                  <g id="tx_4_zs6hzl17whdzi-fill" stroke="none" fill="#f366bb">
+                    <g><text style="font: bold 30px Roboto, sans-serif; white-space: pre;" font-weight="bold"
+                        font-size="30px" font-family="Roboto, sans-serif">
+                        <tspan x="13.39" y="45.64" dominant-baseline="ideographic">4</tspan>
+                      </text></g>
+                  </g>
+                </g>
+                <g id="g-root-cp_1_g-1_4j789d17w4ow7-stroke" data-item-order="-443654" transform="translate(62, 266)">
+                  <g id="cp_1_g-1_4j789d17w4ow7-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 202 46L 202 21C 202 14.9249 197.0751 10 191 10L 190 10L 190 46M 22 46L 22 10L 21 10C 14.9249 10 10 14.9249 10 21L 10 46M 202 190L 202 46M 190 46L 190 190M 22 190L 22 46M 10 46L 10 190M 22 190L 22 226L 72.05 226C 76.99 212.02 90.33 202 106 202C 121.67 202 135.01 212.02 139.95 226L 190 226L 190 190M 10 190L 10 238C 10 244.63 15.37 250 22 250L 72.05 250C 76.99 263.98 90.33 274 106 274C 121.67 274 135.01 263.98 139.95 250L 190 250C 196.63 250 202 244.63 202 238L 202 190">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-cp_2_g-2_1q8urv517w4qa1-stroke" data-item-order="-443626" transform="translate(278, 266)">
+                  <g id="cp_2_g-2_1q8urv517w4qa1-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 202 46L 202 21C 202 14.9249 197.0751 10 191 10L 190 10L 190 46M 22 46L 22 10L 21 10C 14.9249 10 10 14.9249 10 21L 10 46M 202 190L 202 46M 190 46L 190 190M 22 190L 22 46M 10 46L 10 190M 22 190L 22 226L 72.05 226C 76.99 212.02 90.33 202 106 202C 121.67 202 135.01 212.02 139.95 226L 190 226L 190 190M 10 190L 10 238C 10 244.63 15.37 250 22 250L 72.05 250C 76.99 263.98 90.33 274 106 274C 121.67 274 135.01 263.98 139.95 250L 190 250C 196.63 250 202 244.63 202 238L 202 190">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-cp_3_g-3_1lt19qp17w4r2b-stroke" data-item-order="-443598" transform="translate(494, 266)">
+                  <g id="cp_3_g-3_1lt19qp17w4r2b-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 202 46L 202 21C 202 14.9249 197.0751 10 191 10L 190 10L 190 46M 22 46L 22 10L 21 10C 14.9249 10 10 14.9249 10 21L 10 46M 202 190L 202 46M 190 46L 190 190M 22 190L 22 46M 10 46L 10 190M 22 190L 22 226L 72.05 226C 76.99 212.02 90.33 202 106 202C 121.67 202 135.01 212.02 139.95 226L 190 226L 190 190M 10 190L 10 238C 10 244.63 15.37 250 22 250L 72.05 250C 76.99 263.98 90.33 274 106 274C 121.67 274 135.01 263.98 139.95 250L 190 250C 196.63 250 202 244.63 202 238L 202 190">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-cp_4_g-4_18i78gh17w4phh-stroke" data-item-order="-443570" transform="translate(710, 266)">
+                  <g id="cp_4_g-4_18i78gh17w4phh-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 202 46L 202 21C 202 14.9249 197.0751 10 191 10L 190 10L 190 46M 22 46L 22 10L 21 10C 14.9249 10 10 14.9249 10 21L 10 46M 202 190L 202 46M 190 46L 190 190M 22 190L 22 46M 10 46L 10 190M 22 190L 22 226L 72.05 226C 76.99 212.02 90.33 202 106 202C 121.67 202 135.01 212.02 139.95 226L 190 226L 190 190M 10 190L 10 238C 10 244.63 15.37 250 22 250L 72.05 250C 76.99 263.98 90.33 274 106 274C 121.67 274 135.01 263.98 139.95 250L 190 250C 196.63 250 202 244.63 202 238L 202 190">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-tx_projecta_zmk87l17w4qa7-stroke" data-item-order="0" transform="translate(332, 38)"></g>
+                <g id="g-root-ic_trop_1qaq74h17w4paj-stroke" data-item-order="0" transform="translate(98, 122)">
+                  <g id="ic_trop_1qaq74h17w4paj-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#ffe711" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 44.5 87.440002L 40.5 87.440002C 40.5 87.440002 21.5 84.964996 21.5 66.345001C 21.492453 58.096317 26.302345 50.60297 33.805 47.174999C 34.087379 43.089226 36.200603 39.349747 39.555 37M 96.889999 87.440002L 101.634995 87.440002C 101.634995 87.440002 118.509995 87.690002 118.509995 71.620003C 118.511543 66.852325 116.364197 62.337883 112.664459 59.330769C 108.964737 56.323654 104.106743 55.144176 99.440002 56.119999C 99.358429 54.434654 99.119041 52.760662 98.724991 51.119999C 97.828438 47.301899 95.975327 43.77462 93.340004 40.870003M 59 51.160004L 80.404999 51.160004M 69.690002 38.275002C 69.690002 29.400002 55.445 40.490002 55.130001 13.825C 55.121628 13.105331 55.695415 12.513686 56.415001 12.5L 82.959999 12.5C 83.680389 12.513677 84.255615 13.104511 84.25 13.825C 83.925003 40.490002 69.690002 29.400002 69.690002 38.275002L 69.690002 51.160004M 55.130001 16.174999L 44.23 16.174999C 43.807442 16.17234 43.401203 16.337996 43.100998 16.635386C 42.800793 16.932775 42.631317 17.337435 42.629997 17.76C 42.630001 17.809999 42.630001 17.865 42.630001 17.92C 43.055 22.625 44.220001 34.949997 56.904999 31.475L 59.43 30.474998M 84.18 16.174999L 95.565002 16.174999C 95.987556 16.17234 96.393799 16.337996 96.693993 16.635386C 96.994202 16.932775 97.163681 17.337435 97.164993 17.76C 97.165001 17.809999 97.165001 17.865 97.165001 17.92C 96.754997 22.474998 95.664993 34.16 84.089996 31.765001L 79.559998 30.880001M 57.239998 64.274994L 52.18 127.5M 82.544998 64.175003L 87.600006 127.364998M 52.589996 121.630005L 87.144997 121.630005M 53.965 105.195L 85.830002 105.195M 55.240002 88.760002L 84.514999 88.760002M 56.560001 72.110001L 83.18 72.110001">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-ic_cont_1luwp0117wbs3m-stroke" data-item-order="0" transform="translate(314, 122)">
+                  <g id="ic_cont_1luwp0117wbs3m-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#f79438" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 71.43 122.095001C 71.43 125.054436 69.029434 127.452766 66.07 127.449997L 17.855 127.449997C 14.897515 127.449997 12.5 125.052483 12.5 122.095001L 12.5 108.699997C 12.500001 92.426926 25.691931 79.235008 41.965 79.235008C 58.238071 79.235008 71.43 92.426926 71.43 108.700012ZM 30.715 97.449997C 30.715 98.14035 31.274643 98.699997 31.965 98.699997C 32.655357 98.699997 33.215 98.14035 33.215 97.449997C 33.215 96.759644 32.655357 96.199997 31.965 96.199997C 31.274643 96.199997 30.715 96.759644 30.715 97.449997M 50.714996 97.419998C 50.714996 98.110352 51.274643 98.669998 51.964996 98.669998C 52.655357 98.669998 53.214996 98.110352 53.214996 97.419998C 53.214996 96.729645 52.655357 96.169998 51.964996 96.169998C 51.274643 96.169998 50.714996 96.729645 50.714996 97.419998M 41.965 79.239998L 41.965 68.525002M 33.93 60.489998C 33.93 64.927612 37.527393 68.525002 41.965 68.525002C 46.402611 68.525002 50 64.927612 50 60.490002C 50 56.052395 46.402611 52.455002 41.965 52.455002C 37.527393 52.455002 33.93 56.052395 33.93 60.490002M 42.5 42.449997L 42.5 17.549999C 42.5 14.788576 44.738575 12.55 47.5 12.55L 122.5 12.55C 125.261421 12.55 127.5 14.788576 127.5 17.549999L 127.5 59.855C 127.5 62.616425 125.261421 64.854996 122.5 64.854996L 62.5 64.854996M 68.060005 26.889999L 68.060005 50.514999M 56.25 38.699997L 79.875 38.699997M 105 28.700001C 105.690353 28.700001 106.25 29.259644 106.25 29.950001M 103.75 29.950001C 103.75 29.259644 104.309647 28.700001 105 28.700001M 105 31.199999C 104.309647 31.199999 103.75 30.640356 103.75 29.950001M 106.25 29.950001C 106.25 30.640356 105.690353 31.199999 105 31.199999M 105 46.764999C 105.690353 46.764999 106.25 47.324642 106.25 48.014999M 103.75 48C 103.75 47.309643 104.309647 46.75 105 46.75M 105 49.264999C 104.309647 49.264999 103.75 48.705357 103.75 48.014999M 106.25 48C 106.25 48.690353 105.690353 49.25 105 49.25M 115.279999 39C 115.279999 39.690357 114.720352 40.25 114.029999 40.25M 114.029999 37.735001C 114.361923 37.733665 114.680641 37.864929 114.915352 38.09964C 115.15007 38.334351 115.281334 38.653072 115.279999 38.985001M 112.779999 39C 112.778664 38.668068 112.909927 38.34935 113.144638 38.114639C 113.379349 37.879929 113.698074 37.748665 114.029999 37.75M 114.029999 40.235001C 113.339645 40.235001 112.779999 39.675354 112.779999 38.985001M 97.220001 39C 97.220001 39.690357 96.660355 40.25 95.970001 40.25M 95.970001 37.735001C 96.301926 37.733665 96.620644 37.864929 96.855354 38.09964C 97.090065 38.334351 97.221336 38.653072 97.220001 38.985001M 94.720001 39C 94.718666 38.668068 94.84993 38.34935 95.084641 38.114639C 95.319351 37.879929 95.638062 37.748665 95.970001 37.75M 95.970001 40.235001C 95.279648 40.235001 94.720001 39.675354 94.720001 38.985001M 12.5 114.025002L 71.43 114.025002">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-ic_lock_1qeh1n517wfz0n-stroke" data-item-order="0" transform="translate(530, 122)">
+                  <g id="ic_lock_1qeh1n517wfz0n-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#fb6762" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 87.5 87.505005L 122.5 87.505005C 122.5 87.505005 127.5 87.505005 127.5 92.504997L 127.5 122.5C 127.5 122.5 127.5 127.5 122.5 127.5L 87.5 127.5C 87.5 127.5 82.5 127.5 82.5 122.5L 82.5 92.504997C 82.5 92.504997 82.5 87.505005 87.5 87.505005M 105 67.5L 105 67.5C 96.715729 67.5 90 74.215729 90 82.5L 90 87.5L 120 87.5L 120 82.5C 120 74.215729 113.284271 67.5 105 67.5ZM 98.75 107.815002C 98.75 111.266785 101.548225 114.065002 105 114.065002C 108.451775 114.065002 111.25 111.266785 111.25 107.815002C 111.25 104.36322 108.451775 101.565002 105 101.565002C 101.548225 101.565002 98.75 104.36322 98.75 107.815002M 26.25 33.75C 26.25 45.486053 35.76395 55 47.5 55C 59.23605 55 68.75 45.486053 68.75 33.75C 68.75 22.013948 59.23605 12.5 47.5 12.5C 35.76395 12.5 26.25 22.013948 26.25 33.75M 67.5 97.5L 12.5 97.5C 12.498626 82.206238 22.427374 68.682571 37.019356 64.102905C 51.611336 59.523235 67.487083 64.948189 76.225006 77.500008">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-ic_exch_v48tqp17wisco-stroke" data-item-order="0" transform="translate(746, 122)">
+                  <g id="ic_exch_v48tqp17wisco-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-miterlimit="4" stroke="#f366bb" stroke-width="2">
+                    <g>
+                      <path
+                        d="M 42.5 125L 52.5 115L 42.5 105M 15 54.895C 14.988759 59.058895 18.336348 62.45335 22.5 62.5L 67.5 62.5C 71.662506 62.450645 75.008514 59.057785 75 54.895L 75 25C 75 20.857864 71.642136 17.5 67.5 17.5L 22.5 17.5C 18.357864 17.5 15 20.857864 15 25ZM 15 47.5L 75 47.5M 32.5 72.5L 57.5 72.5M 45 62.5L 45 72.5M 80 67.5C 80 64.738571 82.238571 62.5 85 62.5L 115 62.5C 117.761421 62.5 120 64.738571 120 67.5L 120 122.5C 120 125.261421 117.761421 127.5 115 127.5L 85 127.5C 82.238571 127.5 80 125.261421 80 122.5ZM 22.5 90C 22.5 103.807114 33.692883 115 47.5 115L 52.5 115M 102.5 15L 92.5 25L 102.5 35M 122.5 50C 122.5 36.192883 111.307129 25 97.5 25L 92.5 25M 80 107.5L 120 107.5M 100 116.25C 99.309647 116.25 98.75 116.809647 98.75 117.5C 98.75 118.190353 99.309647 118.75 100 118.75C 100.690353 118.75 101.25 118.190353 101.25 117.5C 101.25 116.809647 100.690353 116.25 100 116.25L 100 116.25">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                <g id="g-root-tx_technica_dg36oh17w4q9t-stroke" data-item-order="0" transform="translate(104, 278)"></g>
+                <g id="g-root-tx_aiintegr_1cy0qkx17wbqq3-stroke" data-item-order="0" transform="translate(308, 278)">
+                </g>
+                <g id="g-root-tx_security_zqxjtd17wfwuh-stroke" data-item-order="0" transform="translate(512, 278)"></g>
+                <g id="g-root-tx_crosspla_hrjd7517wirrd-stroke" data-item-order="0" transform="translate(734, 278)"></g>
+                <g id="g-root-tx_achieved_4kg6fl17w4r2i-stroke" data-item-order="0" transform="translate(86, 338)"></g>
+                <g id="g-root-tx_delivere_90w5n517wbp5b-stroke" data-item-order="0" transform="translate(296, 338)"></g>
+                <g id="g-root-tx_fullgdpr_hznjbl17wfz7o-stroke" data-item-order="0" transform="translate(512, 338)"></g>
+                <g id="g-root-tx_seamless_1cviu8h17wipzh-stroke" data-item-order="0" transform="translate(746, 338)">
+                </g>
+                <g id="g-root-tx_1_qrjp1t17w4oow-stroke" data-item-order="0" transform="translate(146, 476)"></g>
+                <g id="g-root-tx_2_4j789d17wbqx4-stroke" data-item-order="0" transform="translate(362, 476)"></g>
+                <g id="g-root-tx_3_v98mfl17wfyma-stroke" data-item-order="0" transform="translate(578, 476)"></g>
+                <g id="g-root-tx_4_zs6hzl17whdzi-stroke" data-item-order="0" transform="translate(794, 476)"></g>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- <div class="card">
+          <h2><span class="card-icon"></span>Project Summary</h2>
+          <p>BudgetWise successfully demonstrates the integration of modern cloud and AI technologies to democratize
+            financial literacy through a comprehensive, cross-platform personal finance application. The project
+            delivers
+            a unified platform that balances usability, scalability, and data protection for everyday users.</p>
+        </div>
+        <div class="card">
+          <h2><span class="card-icon"></span>Key Accomplishments</h2>
+          <ul>
+            <li><strong>Technical Excellence:</strong> Achieved all performance targets with 95% test pass rate and zero
+              critical defects.</li>
+            <li><strong>AI Integration Success:</strong> Delivered sub-5-second AI responses with context-aware
+              financial
+              insights.</li>
+            <li><strong>Security Implementation:</strong> Full GDPR compliance with TLS 1.3 and granular access
+              controls.
+            </li>
+            <li><strong>Cross-platform Success:</strong> Seamless iOS/Android experience with offline-first
+              architecture.
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2><span class="card-icon"></span>Impact & Benefits</h2>
+          <ul>
+            <li><strong>For Users:</strong> Streamlined financial management with intelligent automation.</li>
+            <li><strong>For Industry:</strong> Demonstrated effective integration of AI in personal finance.</li>
+            <li><strong>For Academia:</strong> Case study in modern mobile app dev and AI integration.</li>
+            <li><strong>For Technology:</strong> Showcased Firebase, React Native, & Gemini AI.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2><span class="card-icon"></span>Technical Achievements</h2>
+          <ul>
+            <li><strong>Performance:</strong> Dashboard loads &lt;3s, memory usage &lt;120MB.</li>
+            <li><strong>Scalability:</strong> Support for 150+ currencies with intelligent rate caching.</li>
+            <li><strong>Reliability:</strong> Real-time sync with robust offline capabilities.</li>
+            <li><strong>Security:</strong> Enterprise-grade security exceeding industry standards.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2><span class="card-icon"></span>Innovation Highlights</h2>
+          <ul>
+            <li>AI-Powered Receipt Processing</li>
+            <li>Social Debt Management</li>
+            <li>Intelligent Financial Insights</li>
+            <li>Unified Financial Platform</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2><span class="card-icon"></span>Project Legacy</h2>
+          <p>BudgetWise establishes a foundation for future fintech innovations, demonstrating how thoughtful
+            integration
+            of AI, cloud, and mobile technologies can create meaningful solutions for everyday financial challenges.</p>
+        </div> -->
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

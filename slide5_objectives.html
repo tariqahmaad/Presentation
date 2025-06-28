@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Analysis</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0B0D1A;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-image: url('./images/finance_dashboard.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(11, 13, 26, 0.92), rgba(26, 27, 46, 0.88), rgba(22, 33, 62, 0.85));
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    .main-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 15px 0;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+      animation: slideDown 0.8s ease-out;
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .comparison-table-container {
+      background: rgba(26, 15, 46, 0.7);
+      border-radius: 14px;
+      padding: 18px;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(253, 179, 71, 0.3);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 1150px;
+      margin-bottom: 12px;
+      animation: fadeInUp 1s ease-out 0.3s;
+      animation-fill-mode: backwards;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: transparent;
+      height: 100%;
+    }
+
+    .table-header {
+      background: linear-gradient(135deg, rgba(253, 179, 71, 0.25), rgba(16, 185, 129, 0.25));
+      border-radius: 10px 10px 0 0;
+    }
+
+    .table-header th {
+      padding: 12px 18px;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .table-header th:first-child {
+      color: #FCA5A5;
+      border-right: 2px solid rgba(220, 38, 38, 0.4);
+      width: 50%;
+    }
+
+    .table-header th:last-child {
+      color: #86EFAC;
+      width: 50%;
+    }
+
+    .comparison-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s ease;
+      height: auto;
+    }
+
+    .comparison-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-row td {
+      padding: 8px 18px;
+      vertical-align: middle;
+      border: none;
+      font-size: 13px;
+      line-height: 1.3;
+      color: #F8F9FA;
+      position: relative;
+    }
+
+    .current-solution {
+      border-right: 2px solid rgba(220, 38, 38, 0.2);
+      padding-left: 28px;
+    }
+
+    .current-solution::before {
+      content: '✗';
+      position: absolute;
+      left: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #EF4444;
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 1px 1px 3px rgba(220, 38, 38, 0.4);
+    }
+
+    .budgetwise-advantage {
+      padding-left: 28px;
+    }
+
+    .budgetwise-advantage::before {
+      content: '✓';
+      position: absolute;
+      left: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #22C55E;
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 1px 1px 3px rgba(16, 185, 129, 0.4);
+    }
+
+    .feature-category {
+      font-weight: 600;
+      color: #FDB347;
+    }
+
+    .differentiators-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(253, 179, 71, 0.12));
+      border-radius: 10px;
+      padding: 12px 20px;
+      width: 100%;
+      max-width: 1150px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(253, 179, 71, 0.4);
+      animation: fadeInUp 1s ease-out 0.6s;
+      animation-fill-mode: backwards;
+      flex-shrink: 0;
+    }
+
+    .differentiators-title {
+      text-align: center;
+      color: #FDB347;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
+    }
+
+    .differentiators-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      color: #F8F9FA;
+      font-size: 12px;
+    }
+
+    .differentiator-item {
+      text-align: center;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .differentiator-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(16, 185, 129, 0.6);
+    }
+
+    .differentiator-item strong {
+      color: #FDB347;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide">
+    <div class="overlay"></div>
+    <div class="content-wrapper">
+      <h1 class="main-title">Competitive Analysis</h1>
+
+      <div class="comparison-table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr class="table-header">
+              <th>Current Market Solutions</th>
+              <th>BudgetWise Advantages</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison-row">
+              <td class="current-solution">
+                <strong>Manual Data Entry:</strong> Time-consuming transaction input and categorization
+              </td>
+              <td class="budgetwise-advantage">
+                <strong>AI-Powered Automation:</strong> Smart receipt processing and auto-categorization
+              </td>
+            </tr>
+            <tr class="comparison-row">
+              <td class="current-solution">
+                <strong>App Fragmentation:</strong> Need multiple apps for different financial needs
+              </td>
+              <td class="budgetwise-advantage">
+                <strong>Unified Platform:</strong> All financial management in one comprehensive app
+              </td>
+            </tr>
+            <tr class="comparison-row">
+              <td class="current-solution">
+                <strong>No AI Intelligence:</strong> Basic reports without intelligent recommendations
+              </td>
+              <td class="budgetwise-advantage">
+                <strong>Google Gemini AI:</strong> Context-aware analysis and personalized recommendations
+              </td>
+            </tr>
+            <tr class="comparison-row">
+              <td class="current-solution">
+                <strong>Limited Social Features:</strong> Poor debt tracking and expense sharing
+              </td>
+              <td class="budgetwise-advantage">
+                <strong>Social Debt Management:</strong> Advanced expense sharing and settlement tracking
+              </td>
+            </tr>
+            <tr class="comparison-row">
+              <td class="current-solution">
+                <strong>Poor User Experience:</strong> Complex interfaces, poor performance, limited accessibility
+              </td>
+              <td class="budgetwise-advantage">
+                <strong>Superior Performance:</strong> Sub-3-second loads, offline-first, cross-platform native feel
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="differentiators-banner">
+        <h3 class="differentiators-title">Key Competitive Differentiators</h3>
+        <div class="differentiators-grid">
+          <div class="differentiator-item">
+            <strong>AI Integration:</strong> Only solution with Google Gemini AI for intelligent financial insights
+          </div>
+          <div class="differentiator-item">
+            <strong>Security Excellence:</strong> AES-256 encryption, biometric authentication, secure cloud sync
+          </div>
+          <div class="differentiator-item">
+            <strong>Performance Leadership:</strong> Sub-3-second loads, <120MB memory usage, 95%+ test pass rate </div>
+              <div class="differentiator-item">
+                <strong>User Experience:</strong> Optimistic UI updates, offline-first architecture, cross-platform
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

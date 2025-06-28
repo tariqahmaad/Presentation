@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Performance Metrics</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --color-green: #10b981;
+      --color-blue: #3b82f6;
+      --color-white: #ffffff;
+      --color-text-primary: #f0f0f0;
+      --color-text-secondary: #b0b0c0;
+      --color-bg-card: rgba(25, 28, 43, 0.7);
+      --color-bg-overlay: rgba(10, 12, 23, 0.8);
+      --font-family: 'Poppins', sans-serif;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-family);
+      background-color: #0a0c17;
+    }
+
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      transform-origin: center center;
+      overflow: hidden;
+      background-image: url('./images/finance_dashboard.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-bg-overlay);
+      backdrop-filter: blur(4px);
+    }
+
+    .content-wrapper {
+        position: relative;
+        z-index: 1;
+        width: 90%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px;
+        box-sizing: border-box;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .main-title {
+      color: var(--color-white);
+      font-size: 48px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .metric-card {
+      background-color: var(--color-bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .metric-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .card-title {
+      color: var(--color-white);
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 10px;
+    }
+
+    .metric-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .metric-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .metric-label {
+      color: var(--color-text-secondary);
+    }
+
+    .metric-value {
+      color: var(--color-text-primary);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .metric-value.green { color: var(--color-green); }
+    .metric-value.blue { color: var(--color-blue); }
+
+    .progress-bar-container {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        height: 8px;
+        margin-top: 4px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        border-radius: 4px;
+        background-color: var(--color-green);
+        animation: fillBar 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    @keyframes fillBar {
+        from { width: 0%; }
+    }
+
+    .metric-item-large {
+        text-align: center;
+        padding: 8px 0;
+    }
+
+    .large-number {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 1.1;
+    }
+    
+    .large-number-label {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-top: 2px;
+    }
+    
+    .icon-check {
+        width: 1em;
+        height: 1em;
+        margin-right: 8px;
+        vertical-align: middle;
+        fill: currentColor;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="content-wrapper">
+      <h1 class="main-title">Technical Performance Metrics</h1>
+      <div class="metrics-grid">
+        
+        <!-- Dashboard Performance -->
+        <div class="metric-card">
+          <h3 class="card-title">Dashboard Performance</h3>
+          <div class="metric-item">
+            <span class="metric-label">Load Time</span>
+            <span class="metric-value green">&lt; 3 seconds</span>
+          </div>
+          <div class="progress-bar-container"><div class="progress-bar" style="width: 60%;"></div></div>
+          <div class="metric-item" style="margin-top: 12px;">
+            <span class="metric-label">Memory Usage</span>
+            <span class="metric-value green">&lt; 120 MB</span>
+          </div>
+          <div class="progress-bar-container"><div class="progress-bar" style="width: 80%;"></div></div>
+        </div>
+
+        <!-- AI Response Metrics -->
+        <div class="metric-card">
+          <h3 class="card-title">AI Response Metrics</h3>
+          <div class="metric-item">
+            <span class="metric-label">Query Processing</span>
+            <span class="metric-value blue">&lt; 5s Average</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Context Analysis</span>
+            <span class="metric-value blue">Real-time</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">NLP</span>
+            <span class="metric-value blue">Advanced</span>
+          </div>
+        </div>
+        
+        <!-- Database Performance -->
+        <div class="metric-card">
+            <h3 class="card-title">Database Performance</h3>
+            <div class="metric-item">
+                <span class="metric-label">Data Integrity</span>
+                <span class="metric-value green">100%</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Real-time Sync</span>
+                <span class="metric-value blue">
+                    <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+                    Firebase
+                </span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Offline Storage</span>
+                <span class="metric-value blue">
+                    <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+                    AsyncStorage
+                </span>
+            </div>
+        </div>
+        
+        <!-- User Adoption & Engagement -->
+        <div class="metric-card">
+          <h3 class="card-title">User Adoption & Engagement</h3>
+          <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+            <div class="metric-item-large">
+                <div class="large-number green">95%</div>
+                <div class="large-number-label">Test Pass Rate</div>
+            </div>
+            <div class="metric-item-large">
+                <div class="large-number green">0</div>
+                <div class="large-number-label">Critical Defects</div>
+            </div>
+            <div class="metric-item-large">
+                <div class="large-number blue">6</div>
+                <div class="large-number-label">Core Modules</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security & Compliance -->
+        <div class="metric-card">
+          <h3 class="card-title">Security & Compliance</h3>
+          <div class="metric-item">
+            <span class="metric-label">Encryption</span>
+            <span class="metric-value green">TLS 1.3</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Authentication</span>
+            <span class="metric-value green">Secure Firebase</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Data Protection</span>
+            <span class="metric-value green">GDPR Compliant</span>
+          </div>
+        </div>
+
+        <!-- Scalability Indicators -->
+        <div class="metric-card">
+          <h3 class="card-title">Scalability Indicators</h3>
+          <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+            <div class="metric-item-large">
+                <div class="large-number blue">150+</div>
+                <div class="large-number-label">Currencies</div>
+            </div>
+            <div class="metric-item-large">
+                <div class="large-number blue">3</div>
+                <div class="large-number-label">Account Types</div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Architecture & Technical Design</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0A1A0F 0%, #0F2E1A 50%, #1B4E2D 100%);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      box-sizing: border-box;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #0A1A0F 0%, #0F2E1A 20%, #1B4E2D 60%, #2C5A4A 100%);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.06) 10%, transparent 11%),
+        radial-gradient(circle, rgba(16, 185, 129, 0.08) 10%, transparent 11%);
+      background-size: 45px 45px, 65px 65px;
+      opacity: 0.3;
+      animation: moveBackground 90s linear infinite;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(200px, 200px) rotate(360deg);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 10px 0;
+      padding-bottom: 8px;
+      text-align: center;
+      border-bottom: 3px solid #FDB347;
+      animation: fadeIn 1s ease-out;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-container {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 15px;
+      height: calc(100% - 65px);
+      z-index: 1;
+    }
+
+    .left-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card {
+      background: rgba(26, 15, 46, 0.4);
+      border-radius: 12px;
+      padding: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(253, 179, 71, 0.2);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #FDB347;
+      margin: 0 0 8px 0;
+      border-left: 4px solid #FDB347;
+      padding-left: 12px;
+      text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tech-stack-item {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(34, 197, 94, 0.1));
+      border-radius: 8px;
+      padding: 10px;
+      border-left: 4px solid #10B981;
+      transition: all 0.3s ease;
+    }
+
+    .tech-stack-item:hover {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(34, 197, 94, 0.15));
+      transform: translateX(5px);
+    }
+
+    .tech-stack-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #34D399;
+      margin: 0 0 6px 0;
+    }
+
+    .tech-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tech-list li {
+      font-size: 14px;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      padding-left: 20px;
+      position: relative;
+      color: #F8F9FA;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .tech-list li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #10B981;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .tech-list strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+
+    /* Large Architecture Diagram */
+    .diagram-container {
+      background: rgba(26, 15, 46, 0.4);
+      border: 2px solid #10B981;
+      border-radius: 16px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out 0.2s forwards;
+    }
+
+    .diagram-container:hover {
+      border-color: #22C55E;
+      box-shadow: 0 16px 50px rgba(34, 197, 94, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .diagram-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .diagram-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FDB347;
+      margin: 0 0 5px 0;
+      text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
+    }
+
+    .diagram-subtitle {
+      font-size: 14px;
+      color: #10B981;
+      margin: 0;
+      text-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+
+    .diagram-image {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.3));
+      border-radius: 12px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .diagram-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      opacity: 0.95;
+      transition: all 0.3s ease;
+    }
+
+    .diagram-container:hover .diagram-image img {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+
+    .diagram-overlay-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #10B981;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      text-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    /* Patterns and Principles */
+    .patterns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .pattern-card {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(253, 179, 71, 0.05));
+      border-radius: 10px;
+      padding: 12px;
+      border-left: 4px solid #F59E0B;
+      transition: all 0.3s ease;
+    }
+
+    .pattern-card:hover {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(253, 179, 71, 0.1));
+      transform: translateY(-3px);
+    }
+
+    .pattern-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #FDB347;
+      margin: 0 0 8px 0;
+    }
+
+    .pattern-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pattern-list li {
+      font-size: 13px;
+      line-height: 1.3;
+      margin-bottom: 3px;
+      padding-left: 18px;
+      position: relative;
+      color: #F8F9FA;
+    }
+
+    .pattern-list li::before {
+      content: '●';
+      position: absolute;
+      left: 0;
+      color: #F59E0B;
+      font-size: 12px;
+    }
+
+    .security-card {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.1));
+      border-radius: 10px;
+      padding: 12px;
+      border-left: 4px solid #22C55E;
+      margin-top: 10px;
+    }
+
+    .security-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #22C55E;
+      margin: 0 0 8px 0;
+    }
+
+    .performance-badge {
+      background: linear-gradient(135deg, #FDB347, #F59E0B);
+      color: #000;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(253, 179, 71, 0.3);
+    }
+
+    code {
+      background-color: rgba(55, 65, 81, 0.8);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9em;
+      color: #34D399;
+    }
+
+    /* Full-screen overlay */
+    .diagram-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .diagram-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .diagram-full {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .close-hint {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #10B981;
+      font-size: 14px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide">
+    <h1>System Architecture & Technical Design</h1>
+
+    <div class="main-container">
+      <!-- Left Panel: Technology Stack -->
+      <div class="left-panel">
+        <div class="card">
+          <h2>Technology Stack</h2>
+          <div class="tech-grid">
+            <div class="tech-stack-item">
+              <h3>Frontend</h3>
+              <ul class="tech-list">
+                <li><strong>React Native 0.72+:</strong> Cross-platform mobile development</li>
+                <li><strong>Redux Toolkit:</strong> State management</li>
+                <li><strong>React Navigation:</strong> Navigation system</li>
+              </ul>
+            </div>
+
+            <div class="tech-stack-item">
+              <h3>Backend</h3>
+              <ul class="tech-list">
+                <li><strong>Firebase Suite:</strong> Realtime DB & Authentication</li>
+                <li><strong>Node.js:</strong> Server runtime environment</li>
+                <li><strong>Google Cloud:</strong> Scalable infrastructure</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tech-stack-item">
+            <h3>AI & Analytics</h3>
+            <ul class="tech-list">
+              <li><strong>Google Gemini AI:</strong> Advanced NLP for financial insights</li>
+              <li><strong>Cloud Functions:</strong> Serverless API gateway</li>
+              <li><strong>Firebase Analytics:</strong> User behavior tracking</li>
+            </ul>
+          </div>
+
+          <div class="security-card">
+            <h3>Security Implementation</h3>
+            <ul class="tech-list">
+              <li><strong>OAuth 2.0 + JWT:</strong> Secure authentication & sessions</li>
+              <li><strong>AES-256 Encryption:</strong> End-to-end data protection</li>
+              <li><strong>TLS 1.3:</strong> Secure data transmission</li>
+              <li><strong>Input Validation:</strong> Comprehensive injection prevention</li>
+            </ul>
+          </div>
+
+          <div class="performance-badge">
+            🚀 Performance: <code>&lt;2s</code> load times • <code>99.5%</code> uptime
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Diagram + Patterns -->
+      <div class="right-panel">
+        <div class="diagram-container" id="diagramPreview">
+          <div class="diagram-header">
+            <div class="diagram-title">BudgetWise System Architecture</div>
+            <div class="diagram-subtitle">Click or hover to view in full screen</div>
+          </div>
+          <div class="diagram-image">
+            <img src="./diagrams/System Architecture.png" alt="BudgetWise System Architecture" />
+          </div>
+          <div class="diagram-overlay-hint">Hover for full view</div>
+        </div>
+
+        <div class="card">
+          <h2>Architectural Patterns & Design Principles</h2>
+          <div class="patterns-grid">
+            <div class="pattern-card">
+              <h3>Core Patterns</h3>
+              <ul class="pattern-list">
+                <li><strong>MVVM Architecture:</strong> Model-View-ViewModel separation</li>
+                <li><strong>Repository Pattern:</strong> Abstracted data access</li>
+                <li><strong>Singleton Services:</strong> Centralized management</li>
+                <li><strong>Factory Pattern:</strong> Dynamic component creation</li>
+              </ul>
+            </div>
+
+            <div class="pattern-card">
+              <h3>Data Flow & Scalability</h3>
+              <ul class="pattern-list">
+                <li><strong>Observer Pattern:</strong> Real-time UI updates</li>
+                <li><strong>Event-Driven:</strong> Reactive programming model</li>
+                <li><strong>Offline-First:</strong> AsyncStorage caching</li>
+                <li><strong>Lazy Loading:</strong> Component-based optimization</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-screen diagram overlay -->
+    <div class="diagram-overlay" id="diagramOverlay">
+      <img src="./diagrams/System Architecture.png" alt="BudgetWise System Architecture - Full View"
+        class="diagram-full" />
+      <div class="close-hint">Move mouse away to close</div>
+    </div>
+  </div>
+
+  <script>
+    const diagramPreview = document.getElementById('diagramPreview');
+    const diagramOverlay = document.getElementById('diagramOverlay');
+
+    diagramPreview.addEventListener('mouseenter', () => {
+      diagramOverlay.classList.add('active');
+    });
+
+    diagramOverlay.addEventListener('mouseleave', () => {
+      diagramOverlay.classList.remove('active');
+    });
+
+    diagramPreview.addEventListener('click', () => {
+      diagramOverlay.classList.add('active');
+    });
+
+    diagramOverlay.addEventListener('click', (e) => {
+      if (e.target === diagramOverlay) {
+        diagramOverlay.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+
+</html>

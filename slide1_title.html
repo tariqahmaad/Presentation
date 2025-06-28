@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BudgetWise Graduation Project Presentation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1F2937 0%, #111827 50%, #0F172A 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #1F2937 0%, #111827 30%, #0F172A 70%, #007AFF 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 70px 90px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
+      border: 2px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(253, 179, 71, 0.08) 10%, transparent 11%),
+        radial-gradient(circle, rgba(0, 122, 255, 0.05) 10%, transparent 11%);
+      background-size: 40px 40px, 60px 60px;
+      opacity: 0.4;
+      animation: moveBackground 80s linear infinite;
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(200px, 200px) rotate(360deg);
+      }
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+      z-index: 2;
+    }
+
+    .main-content {
+      text-align: left;
+      z-index: 1;
+      animation: slideUp 1.2s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .title {
+      font-size: 68px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title span {
+      color: #FDB347;
+      text-shadow: 3px 3px 12px rgba(253, 179, 71, 0.3);
+      -webkit-text-fill-color: #FDB347;
+    }
+
+    .subtitle {
+      font-size: 32px;
+      font-weight: 400;
+      margin-top: 20px;
+      color: #007AFF;
+      text-shadow: 2px 2px 8px rgba(0, 122, 255, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .footer {
+      width: 100%;
+      z-index: 1;
+      animation: slideUp 1.2s 0.3s ease-out forwards;
+      opacity: 0;
+    }
+
+    .details-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 25px 0;
+      border-top: 2px solid rgba(253, 179, 71, 0.3);
+      border-bottom: 2px solid rgba(0, 122, 255, 0.3);
+      background: rgba(31, 41, 55, 0.3);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .info-block {
+      max-width: 45%;
+      padding: 0 30px;
+    }
+
+    .info-block h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #FDB347;
+      margin: 0 0 12px 0;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 4px rgba(253, 179, 71, 0.2);
+    }
+
+    .info-block p {
+      font-size: 20px;
+      font-weight: 400;
+      margin: 0;
+      line-height: 1.6;
+      color: #F8F9FA;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      color: #F8F9FA;
+      padding: 0 10px;
+    }
+
+    .university {
+      font-weight: 600;
+      color: #12B76A;
+      text-shadow: 1px 1px 3px rgba(18, 183, 106, 0.3);
+    }
+
+    .date {
+      font-weight: 400;
+      color: #00ffcc;
+      text-shadow: 1px 1px 3px rgba(0, 122, 255, 0.3);
+    }
+
+    /* Decorative elements */
+    .accent-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #FDB347;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(253, 179, 71, 0.6);
+    }
+
+    .accent-dot.top-left {
+      top: 40px;
+      left: 40px;
+      animation: pulse 3s infinite;
+    }
+
+    .accent-dot.bottom-right {
+      bottom: 40px;
+      right: 40px;
+      animation: pulse 3s infinite 1.5s;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide">
+    <div class="accent-dot top-left"></div>
+    <div class="accent-dot bottom-right"></div>
+
+    <div class="main-content">
+      <h1 class="title"><span>BudgetWise:</span> A Cross-Platform<br>Personal Finance Application</h1>
+      <h2 class="subtitle">Graduation Project Presentation</h2>
+    </div>
+
+    <div class="footer">
+      <div class="details-grid">
+        <div class="info-block">
+          <h3>PREPARED BY</h3>
+          <p>Tariq Ahmad<br>Daniah Ayad Tareq Al-Sultani<br>Mohammad Rauf</p>
+        </div>
+        <div class="info-block" style="text-align: right;">
+          <h3>INSTRUCTOR</h3>
+          <p>Dr. Öğr. Üyesi ALPARSLAN HORASAN</p>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="university">Istanbul Aydin University</div>
+        <div class="date">June 30, 2025</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
