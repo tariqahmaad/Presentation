@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Methodology & Lessons Learned</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0F172A 0%, #1A0F2E 50%, #2D1B4E 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      box-sizing: border-box;
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #0F172A 0%, #1A0F2E 20%, #2D1B4E 60%, #4A2C5A 100%);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(253, 179, 71, 0.06) 10%, transparent 11%),
+        radial-gradient(circle, rgba(138, 43, 226, 0.08) 10%, transparent 11%);
+      background-size: 45px 45px, 65px 65px;
+      opacity: 0.3;
+      animation: moveBackground 90s linear infinite;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(200px, 200px) rotate(360deg);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 6px 0;
+      padding-bottom: 6px;
+      border-bottom: 3px solid #FDB347;
+      animation: fadeIn 1s ease-out;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lessons-container {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 520px));
+      grid-template-rows: 1fr 1fr;
+      gap: 18px;
+      flex: 1;
+      z-index: 1;
+      justify-content: center;
+      max-height: 100%;
+    }
+
+    .lesson-card {
+      background: rgba(26, 15, 46, 0.4);
+      border-radius: 12px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(253, 179, 71, 0.2);
+      box-shadow: 0 8px 32px rgba(138, 43, 226, 0.15);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out forwards;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(253, 179, 71, 0.2);
+      border-color: rgba(253, 179, 71, 0.4);
+    }
+
+    .lesson-card:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .lesson-card:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .lesson-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .lesson-card:nth-child(4) {
+      animation-delay: 0.5s;
+    }
+
+    .topic-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(253, 179, 71, 0.3);
+    }
+
+    .topic-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-size: 14px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .tech-stack .topic-icon {
+      background: linear-gradient(135deg, #007AFF, #4FC3F7);
+    }
+
+    .collaboration .topic-icon {
+      background: linear-gradient(135deg, #12B76A, #4ADE80);
+    }
+
+    .ai-integration .topic-icon {
+      background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+    }
+
+    .qa-strategy .topic-icon {
+      background: linear-gradient(135deg, #EF4444, #F87171);
+    }
+
+    .topic-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #FDB347;
+      margin: 0;
+      text-shadow: 1px 1px 4px rgba(253, 179, 71, 0.3);
+    }
+
+    .lesson-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .challenge-statement {
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      border-left: 3px solid #FDB347;
+    }
+
+    .learning-statement {
+      padding: 12px;
+      background: rgba(18, 183, 106, 0.1);
+      border-radius: 8px;
+      border-left: 3px solid #12B76A;
+    }
+
+    .statement-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #FDB347;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .learning-statement .statement-label {
+      color: #12B76A;
+    }
+
+    .statement-text {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #F8F9FA;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide">
+    <header class="slide-header">
+      <h1>Project Methodology & Lessons Learned</h1>
+    </header>
+
+    <div class="lessons-container">
+      <!-- Tech Stack -->
+      <div class="lesson-card tech-stack">
+        <div class="topic-header">
+          <div class="topic-icon">TS</div>
+          <h2 class="topic-title">Tech Stack</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge-statement">
+            <span class="statement-label">Challenge:</span>
+            <p class="statement-text">API instability during cross-platform development.</p>
+          </div>
+          <div class="learning-statement">
+            <span class="statement-label">Learning:</span>
+            <p class="statement-text">Stabilize API versions early and use Expo's managed workflow for rapid, reliable
+              builds.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collaboration -->
+      <div class="lesson-card collaboration">
+        <div class="topic-header">
+          <div class="topic-icon">TC</div>
+          <h2 class="topic-title">Collaboration</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge-statement">
+            <span class="statement-label">Challenge:</span>
+            <p class="statement-text">Coordinating a remote, distributed team effectively.</p>
+          </div>
+          <div class="learning-statement">
+            <span class="statement-label">Learning:</span>
+            <p class="statement-text">Kanban boards provided essential visibility, and async code reviews with clear
+              protocols were highly efficient.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Integration -->
+      <div class="lesson-card ai-integration">
+        <div class="topic-header">
+          <div class="topic-icon">AI</div>
+          <h2 class="topic-title">AI Integration</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge-statement">
+            <span class="statement-label">Challenge:</span>
+            <p class="statement-text">Securing API keys and refining AI response quality.</p>
+          </div>
+          <div class="learning-statement">
+            <span class="statement-label">Learning:</span>
+            <p class="statement-text">Use Cloud Functions as a secure proxy and budget dedicated time for iterative
+              prompt engineering.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- QA Strategy -->
+      <div class="lesson-card qa-strategy">
+        <div class="topic-header">
+          <div class="topic-icon">QA</div>
+          <h2 class="topic-title">Quality Assurance</h2>
+        </div>
+        <div class="lesson-content">
+          <div class="challenge-statement">
+            <span class="statement-label">Challenge:</span>
+            <p class="statement-text">Catching subtle UX issues and regressions effectively.</p>
+          </div>
+          <div class="learning-statement">
+            <span class="statement-label">Learning:</span>
+            <p class="statement-text">Combine structured manual testing for user experience with automated testing for
+              core logic.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

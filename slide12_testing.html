@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing & Quality Assurance Methodology</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0F172A 0%, #1A0F2E 50%, #2D1B4E 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            box-sizing: border-box;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            color: #FFFFFF;
+            background: linear-gradient(135deg, #0F172A 0%, #1A0F2E 20%, #2D1B4E 60%, #4A2C5A 100%);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(253, 179, 71, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(253, 179, 71, 0.06) 10%, transparent 11%),
+                radial-gradient(circle, rgba(138, 43, 226, 0.08) 10%, transparent 11%);
+            background-size: 45px 45px, 65px 65px;
+            opacity: 0.3;
+            animation: moveBackground 90s linear infinite;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(200px, 200px) rotate(360deg);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes progressGrow {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: var(--progress);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide h1 {
+            font-size: 40px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin: 0 0 6px 0;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #FDB347;
+            animation: fadeIn 1s ease-out;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pillars-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            flex: 1;
+            z-index: 1;
+            padding: 20px 0;
+        }
+
+        .pillar-card {
+            background: rgba(26, 15, 46, 0.4);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(253, 179, 71, 0.2);
+            box-shadow: 0 8px 32px rgba(138, 43, 226, 0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FDB347 0%, #007AFF 50%, #12B76A 100%);
+            z-index: 1;
+        }
+
+        .pillar-card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .pillar-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .pillar-card:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(253, 179, 71, 0.2);
+            border-color: rgba(253, 179, 71, 0.4);
+        }
+
+        .pillar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .pillar-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .pillar-1 .pillar-icon {
+            background: linear-gradient(135deg, #007AFF, #4FC3F7, #00D4FF);
+        }
+
+        .pillar-2 .pillar-icon {
+            background: linear-gradient(135deg, #8B5CF6, #A78BFA, #C084FC);
+        }
+
+        .pillar-3 .pillar-icon {
+            background: linear-gradient(135deg, #12B76A, #4ADE80, #22C55E);
+        }
+
+        .pillar-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FDB347;
+            margin: 0;
+            text-shadow: 1px 1px 4px rgba(253, 179, 71, 0.3);
+        }
+
+        .pillar-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pillar-item {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #F8F9FA;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #FDB347;
+        }
+
+        .result-section {
+            margin-top: auto;
+            padding: 16px;
+            background: rgba(253, 179, 71, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(253, 179, 71, 0.3);
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: #F8F9FA;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #FDB347;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <header class="slide-header">
+            <h1>Testing & Quality Assurance Methodology</h1>
+        </header>
+
+        <div class="pillars-container">
+            <!-- Pillar 1: Manual & Module Testing -->
+            <div class="pillar-card pillar-1">
+                <div class="pillar-header">
+                    <div class="pillar-icon">🔧</div>
+                    <h3 class="pillar-title">Manual & Module Testing</h3>
+                </div>
+                <div class="pillar-content">
+                    <div class="pillar-item">160+ functional test cases executed.</div>
+                    <div class="pillar-item">Comprehensive coverage across all 6 modules.</div>
+
+                    <div class="result-section">
+                        <div class="result-label">Result</div>
+                        <div class="result-value">95%+ Pass Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillar 2: Performance & Security -->
+            <div class="pillar-card pillar-2">
+                <div class="pillar-header">
+                    <div class="pillar-icon">🛡️</div>
+                    <h3 class="pillar-title">Performance & Security</h3>
+                </div>
+                <div class="pillar-content">
+                    <div class="pillar-item">Validated &lt;3s load times & &lt;150MB memory usage.</div>
+                    <div class="pillar-item">Ensured GDPR compliance & secure credentials.</div>
+
+                    <div class="result-section">
+                        <div class="result-label">Result</div>
+                        <div class="result-value">All targets met</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillar 3: User Testing (Pilot) -->
+            <div class="pillar-card pillar-3">
+                <div class="pillar-header">
+                    <div class="pillar-icon">👥</div>
+                    <h3 class="pillar-title">User Testing (Pilot)</h3>
+                </div>
+                <div class="pillar-content">
+                    <div class="pillar-item">30 users tested in a 2-week pilot.</div>
+                    <div class="pillar-item">Achieved 80% AI category accuracy.</div>
+
+                    <div class="result-section">
+                        <div class="result-label">Result</div>
+                        <div class="result-value">4.6 / 5 user satisfaction score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Overview & Abstract</title>
+  <title>Project Overview & Scope Definition</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -336,6 +336,230 @@
       left: 25px;
       animation: pulse 3s infinite 1.5s;
     }
+
+    /* Key Pillars Styling */
+    .key-pillars {
+      flex-grow: 1;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .pillar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(18, 183, 106, 0.08);
+      border-radius: 8px;
+      border: 1px solid rgba(253, 179, 71, 0.15);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    .pillar:hover {
+      transform: translateY(-3px);
+      background: rgba(18, 183, 106, 0.12);
+      border-color: rgba(253, 179, 71, 0.3);
+    }
+
+    .pillar-icon {
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(253, 179, 71, 0.15);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .pillar-content {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #F8F9FA;
+    }
+
+    .pillar-content strong {
+      color: #FDB347;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Pillar animation delays */
+    .pillar:nth-child(1) {
+      animation-delay: 0.8s;
+    }
+
+    .pillar:nth-child(2) {
+      animation-delay: 1.0s;
+    }
+
+    .pillar:nth-child(3) {
+      animation-delay: 1.2s;
+    }
+
+    .pillar:nth-child(4) {
+      animation-delay: 1.4s;
+    }
+
+    /* Purpose Flow Styling */
+    .purpose-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .purpose-item {
+      padding: 8px 12px;
+      background: rgba(0, 122, 255, 0.08);
+      border-radius: 8px;
+      border-left: 4px solid #007AFF;
+      font-size: 14px;
+      line-height: 1.4;
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    .purpose-item strong {
+      color: #007AFF;
+      margin-right: 6px;
+    }
+
+    .purpose-item:nth-child(1) {
+      animation-delay: 0.8s;
+    }
+
+    .purpose-item:nth-child(2) {
+      animation-delay: 1.0s;
+    }
+
+    .purpose-item:nth-child(3) {
+      animation-delay: 1.2s;
+    }
+
+    /* Target Users Styling */
+    .target-users {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .target-users li {
+      padding: 8px 12px;
+      padding-left: 25px;
+      background: rgba(18, 183, 106, 0.08);
+      border-radius: 8px;
+      border-left: 4px solid #12B76A;
+      font-size: 14px;
+      line-height: 1.4;
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out forwards;
+      position: relative;
+    }
+
+    .target-users li::before {
+      content: '●';
+      position: absolute;
+      left: 12px;
+      top: 9px;
+      color: #12B76A;
+      font-weight: bold;
+      font-size: 14px;
+      text-shadow: 0 0 8px rgba(18, 183, 106, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    .target-users li strong {
+      color: #12B76A;
+      margin-right: 6px;
+    }
+
+    .target-users li:nth-child(1) {
+      animation-delay: 1.0s;
+    }
+
+    .target-users li:nth-child(2) {
+      animation-delay: 1.2s;
+    }
+
+    .target-users li:nth-child(3) {
+      animation-delay: 1.4s;
+    }
+
+    /* Core Attributes Styling */
+    .attributes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .attribute {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px;
+      background: rgba(253, 179, 71, 0.08);
+      border-radius: 8px;
+      border: 1px solid rgba(253, 179, 71, 0.15);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    .attribute:hover {
+      transform: translateY(-3px);
+      background: rgba(253, 179, 71, 0.12);
+      border-color: rgba(253, 179, 71, 0.3);
+    }
+
+    .attribute-icon {
+      font-size: 20px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(253, 179, 71, 0.15);
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .attribute-content {
+      font-size: 13px;
+      line-height: 1.4;
+      color: #F8F9FA;
+    }
+
+    .attribute-content strong {
+      color: #FDB347;
+      display: block;
+      margin-bottom: 3px;
+      font-size: 14px;
+    }
+
+    .attribute:nth-child(1) {
+      animation-delay: 0.8s;
+    }
+
+    .attribute:nth-child(2) {
+      animation-delay: 1.0s;
+    }
+
+    .attribute:nth-child(3) {
+      animation-delay: 1.2s;
+    }
   </style>
 </head>
 
@@ -344,50 +568,63 @@
     <div class="accent-dot top-right"></div>
     <div class="accent-dot bottom-left"></div>
 
-    <h1>Project Overview & Abstract</h1>
+    <h1>Project Overview & Scope Definition</h1>
     <div class="content-container">
       <div class="column">
         <div class="section">
           <h2>Project Purpose</h2>
-          <ul class="tech-stack">
-            <li><strong>Mission:</strong> AI-powered personal finance management</li>
-            <li><strong>Problem:</strong> Fragmented financial data across platforms</li>
-            <li><strong>Solution:</strong> Intelligent automation for expense tracking</li>
-          </ul>
+          <div class="purpose-flow">
+            <div class="purpose-item">
+              <strong>Mission:</strong> To provide AI-powered personal finance management.
+            </div>
+            <div class="purpose-item">
+              <strong>Problem:</strong> Existing tools are fragmented, manual, and lack personalized insights.
+            </div>
+            <div class="purpose-item">
+              <strong>Solution:</strong> BudgetWise delivers intelligent automation and a unified financial overview.
+            </div>
+          </div>
         </div>
 
         <div class="section">
           <h2>Target Users</h2>
-          <ul class="impact-metrics">
-            <li><strong>Students</strong> managing budgets</li>
-            <li><strong>Professionals</strong> tracking expenses</li>
-            <li><strong>Families</strong> managing household finances</li>
+          <ul class="target-users">
+            <li><strong>Students:</strong> Managing tight budgets and first-time financial tracking</li>
+            <li><strong>Young Professionals:</strong> Tracking expenses, savings goals, and social debts</li>
+            <li><strong>Budget-Conscious Individuals:</strong> Seeking control and intelligent insights into spending
+              habits</li>
           </ul>
         </div>
       </div>
 
       <div class="column">
-        <div class="section">
-          <h2>Core Innovation</h2>
-          <p><strong>AI-First Financial Management:</strong> Intelligent categorization, social debt tracking, and
-            financial insights in one unified platform.</p>
+        <div class="section core-attributes">
+          <h2>Core Attributes & Innovation</h2>
+          <div class="attributes-grid">
+            <div class="attribute">
+              <div class="attribute-icon">🤖</div>
+              <div class="attribute-content">
+                <strong>AI-First Management:</strong> Intelligent categorization, social debt tracking, and financial
+                insights in one unified platform
+              </div>
+            </div>
+            <div class="attribute">
+              <div class="attribute-icon">📱</div>
+              <div class="attribute-content">
+                <strong>Seamless Cross-Platform Experience:</strong> A single, native-feeling app for both iOS & Android
+              </div>
+            </div>
+            <div class="attribute">
+              <div class="attribute-icon">🔄</div>
+              <div class="attribute-content">
+                <strong>Offline-First Architecture:</strong> Core functionality remains available without internet
+                connection, with automatic background sync
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="section">
-          <h2>Project Scope</h2>
-          <ul class="core-modules">
-            <li><strong>Cross-Platform:</strong> Native iOS & Android</li>
-            <li><strong>Real-Time Sync:</strong> Multi-device access</li>
-            <li><strong>Offline-First:</strong> Works without internet</li>
-            <li><strong>All-in-One:</strong> Complete money management</li>
-          </ul>
-        </div>
 
-        <div class="section">
-          <h2>Value Proposition</h2>
-          <p><strong>One App, Complete Control:</strong> Eliminates multiple finance apps through intelligent automation
-            and personalized insights.</p>
-        </div>
       </div>
     </div>
   </div>

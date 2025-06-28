@@ -151,7 +151,7 @@
     }
 
     .card h2 {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 600;
       color: #FDB347;
       margin: 0 0 8px 0;
@@ -160,16 +160,12 @@
       text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
     }
 
-
-
-
-
     .arch-section {
       margin-bottom: 15px;
     }
 
     .arch-section h3 {
-      font-size: 15px;
+      font-size: 18px;
       font-weight: 600;
       color: #34D399;
       margin: 0 0 8px 0;
@@ -184,10 +180,10 @@
     }
 
     .arch-section li {
-      font-size: 13px;
-      line-height: 1.4;
-      margin-bottom: 6px;
-      padding: 6px 10px;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      padding: 10px 12px;
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.05));
       border-radius: 6px;
       border-left: 3px solid #10B981;
@@ -318,38 +314,6 @@
       }
     }
 
-    .diagram-overlay-hint {
-      position: absolute;
-      bottom: 10px;
-      right: 15px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #10B981;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 500;
-      text-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 0.7;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.05);
-      }
-    }
-
-
-
-
-
     .performance-badge {
       background: linear-gradient(135deg, #FDB347, #F59E0B);
       color: #000;
@@ -417,38 +381,29 @@
 
 <body>
   <div class="slide">
-    <h1>System Architecture & Technical Design</h1>
+    <h1>System Architecture & Technology Stack</h1>
 
     <div class="main-container">
       <!-- Left Panel: System Architecture -->
       <div class="left-panel">
         <div class="card">
-          <h2>System Architecture Overview</h2>
-
-          <div class="intro-text">
-            Scalable three-tier architecture for cross-platform financial management.
-          </div>
+          <h2>System Architecture & Technical Design</h2>
 
           <div class="arch-section">
-            <h3>Frontend Layer</h3>
+            <h3>Technology Stack</h3>
             <ul>
-              <li><strong>React Native:</strong> Cross-platform mobile app with native performance</li>
-              <li><strong>Offline-First:</strong> Local storage with seamless cloud sync</li>
+              <li><strong>Frontend:</strong> React Native</li>
+              <li><strong>Backend:</strong> Firebase Suite</li>
+              <li><strong>AI:</strong> Google Gemini</li>
             </ul>
           </div>
 
           <div class="arch-section">
-            <h3>Backend Infrastructure</h3>
+            <h3>Key Design Principles</h3>
             <ul>
-              <li><strong>Firebase:</strong> Real-time database, authentication, and cloud storage</li>
-              <li><strong>Cloud Functions:</strong> Serverless APIs for secure data processing</li>
-            </ul>
-          </div>
-
-          <div class="arch-section">
-            <h3>AI Integration</h3>
-            <ul>
-              <li><strong>Google Gemini AI:</strong> Smart financial insights and categorization</li>
+              <li><strong>Offline-First Architecture</strong></li>
+              <li><strong>Real-time Data Synchronization</strong></li>
+              <li><strong>Robust Security</strong></li>
             </ul>
           </div>
 

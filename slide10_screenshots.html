@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Implementation & User Interface Design</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #2A2A2A 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            box-sizing: border-box;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            color: #FFFFFF;
+            background: linear-gradient(135deg, #0A0A0A 0%, #151515 20%, #202020 60%, #2A2A2A 100%);
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 50%, #22C55E 100%);
+            border-radius: 20px 20px 0 0;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 44px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin: 0 0 25px 0;
+            padding-bottom: 15px;
+            text-align: center;
+            border-bottom: 3px solid #FDB347;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .screenshots-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            flex: 1;
+            z-index: 1;
+            padding: 10px 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .screenshot-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 15px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .screenshot-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .screenshot-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .screenshot-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .screenshot-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .screenshot-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .screenshot-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .screenshot-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .screenshot-card:hover .screenshot-image {
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .screenshot-placeholder-img {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            flex-direction: column;
+        }
+
+        .screenshot-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .screenshot-description {
+            font-size: 13px;
+            color: #CBD5E1;
+            line-height: 1.4;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        /* Popup Overlay Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .popup-content {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .popup-image {
+            max-width: 95vw;
+            max-height: 95vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            animation: popupImageIn 0.4s ease-out;
+        }
+
+        @keyframes popupImageIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .screenshot-card {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <h1>System Implementation & User Interface Design</h1>
+
+        <div class="screenshots-container">
+            <div class="screenshot-card" data-image="1.png" data-title="Authentication & Account Management"
+                data-description="Secure login system with biometric authentication, user registration flow, and comprehensive profile management features.">
+                <img class="screenshot-image" src="./images/1.png" alt="Authentication System"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="screenshot-placeholder-img" style="display:none;">
+                    📷<br><small>1.png</small>
+                </div>
+                <h3 class="screenshot-title">Authentication System</h3>
+                <p class="screenshot-description">Secure login, registration & profile management</p>
+            </div>
+
+            <div class="screenshot-card" data-image="2.png" data-title="AI-Powered Transaction Management"
+                data-description="Intelligent transaction categorization, expense tracking, and AI-driven financial insights with smart spending analysis.">
+                <img class="screenshot-image" src="./images/2.png" alt="AI Transaction Manager"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="screenshot-placeholder-img" style="display:none;">
+                    📷<br><small>2.png</small>
+                </div>
+                <h3 class="screenshot-title">AI Transaction Manager</h3>
+                <p class="screenshot-description">Smart categorization & expense tracking</p>
+            </div>
+
+            <div class="screenshot-card" data-image="3.png" data-title="Social Debt Tracking"
+                data-description="Comprehensive debt management system with friend connections, payment reminders, and social financial interactions.">
+                <img class="screenshot-image" src="./images/3.png" alt="Social Debt Tracking"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="screenshot-placeholder-img" style="display:none;">
+                    📷<br><small>3.png</small>
+                </div>
+                <h3 class="screenshot-title">Social Debt Tracking</h3>
+                <p class="screenshot-description">Manage debts & payments with friends</p>
+            </div>
+
+            <div class="screenshot-card" data-image="4.png" data-title="Currency Exchange & Conversion"
+                data-description="Real-time exchange rates, multi-currency support, and intelligent currency conversion tools for international transactions.">
+                <img class="screenshot-image" src="./images/4.png" alt="Currency Exchange"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="screenshot-placeholder-img" style="display:none;">
+                    📷<br><small>4.png</small>
+                </div>
+                <h3 class="screenshot-title">Currency Exchange</h3>
+                <p class="screenshot-description">Real-time rates & multi-currency support</p>
+            </div>
+
+            <div class="screenshot-card" data-image="5.png" data-title="AI Chat Interface"
+                data-description="Intelligent financial assistant powered by AI, providing personalized advice, answering queries, and offering financial guidance.">
+                <img class="screenshot-image" src="./images/5.png" alt="AI Financial Assistant"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="screenshot-placeholder-img" style="display:none;">
+                    📷<br><small>5.png</small>
+                </div>
+                <h3 class="screenshot-title">AI Financial Assistant</h3>
+                <p class="screenshot-description">Smart chat for financial guidance</p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <img class="popup-image" id="popupImage" src="" alt="Screenshot">
+        </div>
+    </div>
+
+    <script>
+        // Popup and interaction functionality
+        const screenshotCards = document.querySelectorAll('.screenshot-card');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupImage = document.getElementById('popupImage');
+
+        let hoverTimeout;
+
+        screenshotCards.forEach(card => {
+            // Hover animations
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+
+                // Show popup on hover with delay
+                hoverTimeout = setTimeout(() => {
+                    showPopup(card);
+                }, 800); // 800ms delay
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+
+                // Clear hover timeout
+                clearTimeout(hoverTimeout);
+            });
+
+            // Also show popup on click for touch devices
+            card.addEventListener('click', () => {
+                showPopup(card);
+            });
+        });
+
+        function showPopup(card) {
+            const imageName = card.getAttribute('data-image');
+            const title = card.getAttribute('data-title');
+
+            popupImage.src = `./images/${imageName}`;
+            popupImage.alt = title;
+
+            popupOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close popup functionality - click anywhere to close
+        popupOverlay.addEventListener('click', closePopupFunction);
+
+        function closePopupFunction() {
+            popupOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popupOverlay.style.display === 'flex') {
+                closePopupFunction();
+            }
+        });
+
+        // Image error handling
+        popupImage.addEventListener('error', () => {
+            // Close popup if image fails to load
+            closePopupFunction();
+        });
+    </script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Analysis & Functional Scope</title>
+    <title>Requirements Analysis & Use Case Modeling</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -158,7 +158,7 @@
         }
 
         .card h2 {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 600;
             color: #3B82F6;
             margin: 0 0 12px 0;
@@ -172,7 +172,7 @@
         }
 
         .journey-section h3 {
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 600;
             color: #60A5FA;
             margin: 0 0 8px 0;
@@ -187,10 +187,10 @@
         }
 
         .journey-section li {
-            font-size: 13px;
-            line-height: 1.4;
-            margin-bottom: 6px;
-            padding: 6px 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            padding: 10px 12px;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.05));
             border-radius: 6px;
             border-left: 3px solid #3B82F6;
@@ -209,7 +209,7 @@
         }
 
         .intro-text {
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.5;
             color: #E2E8F0;
             margin-bottom: 15px;
@@ -344,23 +344,21 @@
             text-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
         }
 
-        .requirements-badge {
-            background: linear-gradient(135deg, #3B82F6, #1E40AF);
-            color: #FFFFFF;
-            padding: 6px 12px;
-            border-radius: 20px;
+        .source-label {
+            color: #94A3B8;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 400;
             text-align: center;
-            margin-top: 12px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
     <div class="slide">
-        <h1>System Analysis & Functional Scope</h1>
+        <h1>Requirements Analysis & Use Case Modeling</h1>
 
         <div class="main-container">
             <!-- Left Panel: User Journey -->
@@ -374,31 +372,19 @@
 
                     <div class="journey-section">
                         <ul>
-                            <li><strong>User Authentication & Account Setup:</strong> Secure login and specialized
-                                account creation (Balance, Income, Savings)</li>
-                            <li><strong>Financial Transaction Management:</strong> Complete income/expense tracking with
-                                categorization and editing</li>
+                            <li><strong>User Authentication & Account Setup:</strong> Secure login & creation of
+                                Balance, Income, and Savings accounts.</li>
+                            <li><strong>Financial Tracking:</strong> Add, edit, and categorize all income and expense
+                                transactions.</li>
                             <li><strong>Debt Tracking with Friends:</strong> Monitor and manage interpersonal financial
-                                obligations</li>
+                                obligations.</li>
                             <li><strong>AI-Powered Financial Insights:</strong> Smart analysis, chat assistance, and
-                                personalized recommendations</li>
-                            <li><strong>Offline Access & Cloud Sync:</strong> Seamless data availability across devices
-                                with backup</li>
+                                personalized recommendations.</li>
                         </ul>
                     </div>
 
-                    <div class="actor-section">
-                        <h3>System Actors</h3>
-                        <div class="actor-list">
-                            <div class="actor-item">👤 Primary User</div>
-                            <div class="actor-item">🤖 AI System</div>
-                            <div class="actor-item">☁️ Cloud Services</div>
-                            <div class="actor-item">🔔 Notification System</div>
-                        </div>
-                    </div>
-
-                    <div class="requirements-badge">
-                        📋 Functional Requirements Analysis • UML 2.5 Standard
+                    <div class="source-label">
+                        Source: UML 2.5 Use Case Diagram
                     </div>
                 </div>
             </div>
