@@ -160,61 +160,60 @@
       text-shadow: 2px 2px 8px rgba(253, 179, 71, 0.3);
     }
 
-    .tech-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 10px;
+
+
+
+
+    .arch-section {
+      margin-bottom: 15px;
     }
 
-    .tech-stack-item {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(34, 197, 94, 0.1));
-      border-radius: 8px;
-      padding: 10px;
-      border-left: 4px solid #10B981;
-      transition: all 0.3s ease;
-    }
-
-    .tech-stack-item:hover {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(34, 197, 94, 0.15));
-      transform: translateX(5px);
-    }
-
-    .tech-stack-item h3 {
-      font-size: 16px;
+    .arch-section h3 {
+      font-size: 15px;
       font-weight: 600;
       color: #34D399;
-      margin: 0 0 6px 0;
+      margin: 0 0 8px 0;
+      padding-bottom: 4px;
+      border-bottom: 2px solid rgba(52, 211, 153, 0.3);
     }
 
-    .tech-list {
+    .arch-section ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    .tech-list li {
-      font-size: 14px;
-      line-height: 1.3;
-      margin-bottom: 4px;
-      padding-left: 20px;
-      position: relative;
+    .arch-section li {
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.05));
+      border-radius: 6px;
+      border-left: 3px solid #10B981;
       color: #F8F9FA;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
     }
 
-    .tech-list li::before {
-      content: '▶';
-      position: absolute;
-      left: 0;
-      color: #10B981;
-      font-size: 12px;
-      font-weight: bold;
+    .arch-section li:hover {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.1));
+      transform: translateX(5px);
     }
 
-    .tech-list strong {
-      color: #E5E7EB;
+    .arch-section strong {
+      color: #34D399;
       font-weight: 600;
+    }
+
+    .intro-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #E2E8F0;
+      margin-bottom: 20px;
+      padding: 12px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.05));
+      border-radius: 8px;
+      border-left: 4px solid #06B6D4;
     }
 
     /* Large Architecture Diagram */
@@ -222,17 +221,19 @@
       background: rgba(26, 15, 46, 0.4);
       border: 2px solid #10B981;
       border-radius: 16px;
-      padding: 15px;
+      padding: 12px;
       backdrop-filter: blur(10px);
       box-shadow: 0 12px 40px rgba(16, 185, 129, 0.2);
       cursor: pointer;
       transition: all 0.3s ease;
       position: relative;
-      height: 250px;
+      height: 100%;
       display: flex;
       flex-direction: column;
       opacity: 0;
       animation: slideInUp 0.8s ease-out 0.2s forwards;
+      min-height: 0;
+      max-height: 100%;
     }
 
     .diagram-container:hover {
@@ -243,7 +244,8 @@
 
     .diagram-header {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      flex-shrink: 0;
     }
 
     .diagram-title {
@@ -271,6 +273,8 @@
       border: 1px solid rgba(16, 185, 129, 0.3);
       overflow: hidden;
       position: relative;
+      min-height: 0;
+      max-height: 100%;
     }
 
     .diagram-image img {
@@ -314,70 +318,37 @@
       }
     }
 
-    /* Patterns and Principles */
-    .patterns-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .pattern-card {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(253, 179, 71, 0.05));
-      border-radius: 10px;
-      padding: 12px;
-      border-left: 4px solid #F59E0B;
-      transition: all 0.3s ease;
-    }
-
-    .pattern-card:hover {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(253, 179, 71, 0.1));
-      transform: translateY(-3px);
-    }
-
-    .pattern-card h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #FDB347;
-      margin: 0 0 8px 0;
-    }
-
-    .pattern-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .pattern-list li {
-      font-size: 13px;
-      line-height: 1.3;
-      margin-bottom: 3px;
-      padding-left: 18px;
-      position: relative;
-      color: #F8F9FA;
-    }
-
-    .pattern-list li::before {
-      content: '●';
+    .diagram-overlay-hint {
       position: absolute;
-      left: 0;
-      color: #F59E0B;
+      bottom: 10px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #10B981;
+      padding: 6px 12px;
+      border-radius: 6px;
       font-size: 12px;
+      font-weight: 500;
+      text-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+      animation: pulse 2s infinite;
     }
 
-    .security-card {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.1));
-      border-radius: 10px;
-      padding: 12px;
-      border-left: 4px solid #22C55E;
-      margin-top: 10px;
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
     }
 
-    .security-card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: #22C55E;
-      margin: 0 0 8px 0;
-    }
+
+
+
 
     .performance-badge {
       background: linear-gradient(135deg, #FDB347, #F59E0B);
@@ -449,46 +420,35 @@
     <h1>System Architecture & Technical Design</h1>
 
     <div class="main-container">
-      <!-- Left Panel: Technology Stack -->
+      <!-- Left Panel: System Architecture -->
       <div class="left-panel">
         <div class="card">
-          <h2>Technology Stack</h2>
-          <div class="tech-grid">
-            <div class="tech-stack-item">
-              <h3>Frontend</h3>
-              <ul class="tech-list">
-                <li><strong>React Native 0.72+:</strong> Cross-platform mobile development</li>
-                <li><strong>Redux Toolkit:</strong> State management</li>
-                <li><strong>React Navigation:</strong> Navigation system</li>
-              </ul>
-            </div>
+          <h2>System Architecture Overview</h2>
 
-            <div class="tech-stack-item">
-              <h3>Backend</h3>
-              <ul class="tech-list">
-                <li><strong>Firebase Suite:</strong> Realtime DB & Authentication</li>
-                <li><strong>Node.js:</strong> Server runtime environment</li>
-                <li><strong>Google Cloud:</strong> Scalable infrastructure</li>
-              </ul>
-            </div>
+          <div class="intro-text">
+            Scalable three-tier architecture for cross-platform financial management.
           </div>
 
-          <div class="tech-stack-item">
-            <h3>AI & Analytics</h3>
-            <ul class="tech-list">
-              <li><strong>Google Gemini AI:</strong> Advanced NLP for financial insights</li>
-              <li><strong>Cloud Functions:</strong> Serverless API gateway</li>
-              <li><strong>Firebase Analytics:</strong> User behavior tracking</li>
+          <div class="arch-section">
+            <h3>Frontend Layer</h3>
+            <ul>
+              <li><strong>React Native:</strong> Cross-platform mobile app with native performance</li>
+              <li><strong>Offline-First:</strong> Local storage with seamless cloud sync</li>
             </ul>
           </div>
 
-          <div class="security-card">
-            <h3>Security Implementation</h3>
-            <ul class="tech-list">
-              <li><strong>OAuth 2.0 + JWT:</strong> Secure authentication & sessions</li>
-              <li><strong>AES-256 Encryption:</strong> End-to-end data protection</li>
-              <li><strong>TLS 1.3:</strong> Secure data transmission</li>
-              <li><strong>Input Validation:</strong> Comprehensive injection prevention</li>
+          <div class="arch-section">
+            <h3>Backend Infrastructure</h3>
+            <ul>
+              <li><strong>Firebase:</strong> Real-time database, authentication, and cloud storage</li>
+              <li><strong>Cloud Functions:</strong> Serverless APIs for secure data processing</li>
+            </ul>
+          </div>
+
+          <div class="arch-section">
+            <h3>AI Integration</h3>
+            <ul>
+              <li><strong>Google Gemini AI:</strong> Smart financial insights and categorization</li>
             </ul>
           </div>
 
@@ -498,41 +458,11 @@
         </div>
       </div>
 
-      <!-- Right Panel: Diagram + Patterns -->
+      <!-- Right Panel: System Architecture Diagram -->
       <div class="right-panel">
         <div class="diagram-container" id="diagramPreview">
-          <div class="diagram-header">
-            <div class="diagram-title">BudgetWise System Architecture</div>
-            <div class="diagram-subtitle">Click or hover to view in full screen</div>
-          </div>
           <div class="diagram-image">
             <img src="./diagrams/System Architecture.png" alt="BudgetWise System Architecture" />
-          </div>
-          <div class="diagram-overlay-hint">Hover for full view</div>
-        </div>
-
-        <div class="card">
-          <h2>Architectural Patterns & Design Principles</h2>
-          <div class="patterns-grid">
-            <div class="pattern-card">
-              <h3>Core Patterns</h3>
-              <ul class="pattern-list">
-                <li><strong>MVVM Architecture:</strong> Model-View-ViewModel separation</li>
-                <li><strong>Repository Pattern:</strong> Abstracted data access</li>
-                <li><strong>Singleton Services:</strong> Centralized management</li>
-                <li><strong>Factory Pattern:</strong> Dynamic component creation</li>
-              </ul>
-            </div>
-
-            <div class="pattern-card">
-              <h3>Data Flow & Scalability</h3>
-              <ul class="pattern-list">
-                <li><strong>Observer Pattern:</strong> Real-time UI updates</li>
-                <li><strong>Event-Driven:</strong> Reactive programming model</li>
-                <li><strong>Offline-First:</strong> AsyncStorage caching</li>
-                <li><strong>Lazy Loading:</strong> Component-based optimization</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
